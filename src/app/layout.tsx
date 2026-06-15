@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://xeroping.online'),
   title: {
     template: '%s | Zero Ping',
-    default: 'Zero Ping | 100% Private, Local Developer Utilities',
+    default: 'Zero Ping | The Ultimate Offline Developer Toolkit',
   },
   description: 'A suite of lightning-fast, zero-server developer utilities. Convert formats, manipulate PDFs, and process massive datasets entirely in your browser. Zero uploads.',
   keywords: [
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     siteName: 'Zero Ping',
-    title: 'Zero Ping | 100% Private, Local Developer Utilities',
+    title: 'Zero Ping | The Ultimate Offline Developer Toolkit',
     description: 'Lightning-fast, zero-server developer utilities running entirely in your browser. No uploads. No tracking.',
     images: [{ url: '/og/home.png', width: 1200, height: 630 }],
     url: 'https://xeroping.online',
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     site: '@Zero PingDev',
-    title: 'Zero Ping | 100% Private, Local Developer Utilities',
+    title: 'Zero Ping | The Ultimate Offline Developer Toolkit',
     description: 'Lightning-fast, zero-server developer utilities running entirely in your browser. No uploads. No tracking.',
     images: ['https://xeroping.online/og/home.png'],
   },
@@ -100,6 +100,39 @@ export default function RootLayout({
                   "sameAs": [
                     "https://twitter.com/Zero PingDev",
                     "https://github.com/Zero Ping"
+                  ]
+                },
+                {
+                  "@type": "ItemList",
+                  "itemListElement": [
+                    {
+                      "@type": "SiteNavigationElement",
+                      "position": 1,
+                      "name": "Image Converter",
+                      "url": "https://xeroping.online/tools/image-converter",
+                      "description": "Convert images locally between WebP, PNG, JPG, and more."
+                    },
+                    {
+                      "@type": "SiteNavigationElement",
+                      "position": 2,
+                      "name": "Dev Toolkit",
+                      "url": "https://xeroping.online/tools/dev-toolkit",
+                      "description": "Decode JWTs, compile SVGs, and generate hashes without servers."
+                    },
+                    {
+                      "@type": "SiteNavigationElement",
+                      "position": 3,
+                      "name": "PDF Toolkit",
+                      "url": "https://xeroping.online/tools/pdf-toolkit",
+                      "description": "Merge, split, and sign PDF documents entirely in your browser."
+                    },
+                    {
+                      "@type": "SiteNavigationElement",
+                      "position": 4,
+                      "name": "Data Converter",
+                      "url": "https://xeroping.online/tools/data-converter",
+                      "description": "Transform JSON, CSV, XML, and SQL securely."
+                    }
                   ]
                 }
               ]
