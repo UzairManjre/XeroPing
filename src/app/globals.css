@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+:root {
+  --background: #8ecae6; /* Sky Blue Light */
+  --foreground: #023047; /* Deep Space Blue */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-space-grotesk), sans-serif;
+  --font-mono: var(--font-jetbrains-mono), monospace;
+
+  /* Brutalistic Summer Fun Palette */
+  --color-summer-sky: #8ecae6;
+  --color-summer-sea: #219ebc;
+  --color-summer-space: #023047;
+  --color-summer-amber: #ffb703;
+  --color-summer-tiger: #fb8500;
+
+  /* Brutalistic Shadows */
+  --shadow-brutal: 6px 6px 0px #023047;
+  --shadow-brutal-hover: 2px 2px 0px #023047;
+  --shadow-brutal-lg: 12px 12px 0px #023047;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+h1, h2, h3, h4, h5, h6, .font-sans {
+  font-family: var(--font-sans);
+}
+
+/* Base styles for brutalism */
+* {
+  border-color: #023047;
+}
