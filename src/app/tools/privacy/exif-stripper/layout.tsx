@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Free Online EXIF Data Stripper | ZeroNode',
+  title: 'Free Online EXIF Data Stripper | Zero Ping',
   description: 'Remove GPS locations, camera models, and hidden metadata from your photos online.',
   openGraph: {
     title: 'Free Online EXIF Data Stripper',

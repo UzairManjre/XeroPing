@@ -52,7 +52,7 @@ export default function TextRedactor() {
   const { history, addHistory, clearHistory } = useLocalHistory('text_redactor');
 
   const getExampleData = () => {
-    return '[2026-06-15 00:10:00] ERROR auth: Failed login attempt for user admin@zeronode.net from IP 192.168.1.105. AWS Key AKIAIOSFODNN7EXAMPLE and Bearer Token eyJhbGciOiJIUzI1NiIsInR5cCI.xxxx.xxxx were exposed. Call support at +1 (555) 019-2831. Visa ending in 4111-2222-3333-4444.';
+    return '[2026-06-15 00:10:00] ERROR auth: Failed login attempt for user admin@Zero Ping.net from IP 192.168.1.105. AWS Key AKIAIOSFODNN7EXAMPLE and Bearer Token eyJhbGciOiJIUzI1NiIsInR5cCI.xxxx.xxxx were exposed. Call support at +1 (555) 019-2831. Visa ending in 4111-2222-3333-4444.';
   };
 
   const [options, setOptions] = useState<RedactOptions>({

@@ -30,10 +30,10 @@ export default function Donate() {
           <Heart className="w-8 h-8 text-summer-space stroke-[2.5px] fill-rose-500" />
         </div>
         <h1 className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-summer-space mb-3" style={{ textShadow: '2px 2px 0px #fb8500' }}>
-          Support ZeroNode
+          Support Zero Ping
         </h1>
         <p className="text-summer-space/80 font-bold max-w-xl mx-auto">
-          ZeroNode runs 100% locally in your browser to protect your privacy. No uploads, no servers, and no subscriptions. Support our independent development!
+          Zero Ping runs 100% locally in your browser to protect your privacy. No uploads, no servers, and no subscriptions. Support our independent development!
         </p>
       </header>
 
@@ -56,7 +56,7 @@ export default function Donate() {
                       : 'bg-white hover:bg-zinc-50 text-summer-space'
                   }`}
                 >
-                  {num === 1 ? '❤️ $5' : `❤️ $${num * pricePerCoffee}`}
+                  {num === 1 ? 'â¤ï¸ $5' : `â¤ï¸ $${num * pricePerCoffee}`}
                 </button>
               ))}
             </div>
@@ -79,10 +79,10 @@ export default function Donate() {
 
             {/* Dynamic Status / message */}
             <div className="bg-white border-[3px] border-summer-space p-4 text-center font-bold text-sm">
-              {coffees <= 2 && '😊 Every drop counts! Thank you for the support.'}
-              {coffees > 2 && coffees <= 5 && '🚀 Support powers coders. You are fueling next week\'s features!'}
-              {coffees > 5 && coffees <= 10 && '🔥 Super Support! You are helping cover our domain and hosting fees.'}
-              {coffees > 10 && '👑 Absolute Legend! You are a patron of privacy-first tooling.'}
+              {coffees <= 2 && 'ðŸ˜Š Every drop counts! Thank you for the support.'}
+              {coffees > 2 && coffees <= 5 && 'ðŸš€ Support powers coders. You are fueling next week\'s features!'}
+              {coffees > 5 && coffees <= 10 && 'ðŸ”¥ Super Support! You are helping cover our domain and hosting fees.'}
+              {coffees > 10 && 'ðŸ‘‘ Absolute Legend! You are a patron of privacy-first tooling.'}
             </div>
           </div>
 

@@ -1,8 +1,8 @@
 import React from 'react';
 
 export const metadata = {
-  title: 'About Us | ZeroNode Utilities',
-  description: 'About ZeroNode Utilities',
+  title: 'About Us | Zero Ping Utilities',
+  description: 'About Zero Ping Utilities',
 };
 
 export default function AboutUs() {
@@ -12,16 +12,16 @@ export default function AboutUs() {
       
       <div className="text-lg font-bold mb-6 space-y-6">
         <p>
-          Welcome to ZeroNode Utilities! Our mission is to provide fast, local developer tools to help you streamline your daily workflow without compromising your privacy.
+          Welcome to Zero Ping Utilities! Our mission is to provide fast, local developer tools to help you streamline your daily workflow without compromising your privacy.
         </p>
         <p>
           In a world where almost every online tool requires you to upload your sensitive data, images, and logs to a remote server, we decided to take a different approach. Utilizing modern web technologies like WebAssembly, we built a comprehensive suite of utilities that run entirely inside your browser.
         </p>
         <p>
-          This means you get the convenience of a web application with the speed and security of a desktop app. Whether you need to redact API keys from a log file, convert high-resolution RAW images, or strip GPS data from a photo, you can trust ZeroNode to handle it securely and locally.
+          This means you get the convenience of a web application with the speed and security of a desktop app. Whether you need to redact API keys from a log file, convert high-resolution RAW images, or strip GPS data from a photo, you can trust Zero Ping to handle it securely and locally.
         </p>
         <p>
-          We are constantly adding new tools and improving existing ones to ensure you have the best possible experience. Thank you for choosing ZeroNode Utilities!
+          We are constantly adding new tools and improving existing ones to ensure you have the best possible experience. Thank you for choosing Zero Ping Utilities!
         </p>
       </div>
 

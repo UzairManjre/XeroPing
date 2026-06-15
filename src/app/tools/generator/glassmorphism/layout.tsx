@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'CSS Glassmorphism Generator | XeroPing',
+  title: 'CSS Glassmorphism Generator | Zero Ping',
   description: 'Create beautiful, modern glass-like CSS effects instantly in your browser. 100% secure and local.',
   openGraph: {
     title: 'CSS Glassmorphism Generator',

@@ -2,7 +2,7 @@ import NumberConverterClient from './NumberConverterClient';
 import AdUnit from '@/components/AdUnit';
 
 export const metadata = {
-  title: 'Number Converter | ZeroNode',
+  title: 'Number Converter | Zero Ping',
   description: 'Convert between Binary, Decimal, Hex, Octal, ASCII, Roman Numerals, Fractions and more with calculation steps.',
 };
 

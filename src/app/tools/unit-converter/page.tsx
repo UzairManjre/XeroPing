@@ -2,7 +2,7 @@ import UnitConverterClient from './UnitConverterClient';
 import AdUnit from '@/components/AdUnit';
 
 export const metadata = {
-  title: 'Ultimate Free Online Unit Converter | All Measurement Conversions | ZeroNode',
+  title: 'Ultimate Free Online Unit Converter | All Measurement Conversions | Zero Ping',
   description: 'Best free online unit converter. Instantly convert length, weight, temperature, fluid dynamics, electromagnetism, mechanics, and 100+ scientific engineering units without downloading apps.',
   keywords: 'unit converter, free online converter, length converter, weight converter, temperature converter, scientific converter, engineering units, calculate metrics'
 };
@@ -94,7 +94,7 @@ export default function UnitConverterPage() {
           What separates our tool from a basic calculator is our specialized conversion engine designed for STEM professionals. We provide full coverage for difficult-to-find advanced scientific disciplines:
         </p>
         <ul className="list-disc pl-8 font-bold text-summer-space/80 mb-6 space-y-2">
-          <li><strong>Thermodynamics & Heat:</strong> Heat Flux Density, Thermal Conductivity (W/(m·K) to BTU/(h·ft·°F)), Specific Heat Capacity.</li>
+          <li><strong>Thermodynamics & Heat:</strong> Heat Flux Density, Thermal Conductivity (W/(mÂ·K) to BTU/(hÂ·ftÂ·Â°F)), Specific Heat Capacity.</li>
           <li><strong>Fluid Mechanics:</strong> Dynamic Viscosity (Pascal-seconds to Poise), Volumetric Flow Rate (Cubic meters/sec to US Gallons/min).</li>
           <li><strong>Electromagnetism:</strong> Magnetic Flux (Webers, Maxwells), Electric Charge (Coulombs, Ampere-hours), and Illuminance (Lux, Foot-candles).</li>
           <li><strong>Radiology & Nuclear:</strong> Radioactivity (Becquerels, Curies, Rutherfords) and Radiation Absorbed Dose (Grays, Rads).</li>

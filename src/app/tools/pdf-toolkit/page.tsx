@@ -2,9 +2,9 @@ import PdfToolkitWrapper from './PdfToolkitWrapper';
 
 export const metadata = {
   title: 'Secure PDF Toolkit | Merge, Split & Edit PDFs Offline',
-  description: 'Merge, split, compress, and e-sign PDF documents locally in your browser. Bank-grade privacy — your sensitive legal and financial documents are never uploaded.',
+  description: 'Merge, split, compress, and e-sign PDF documents locally in your browser. Bank-grade privacy â€” your sensitive legal and financial documents are never uploaded.',
   alternates: {
-    canonical: 'https://zeronode.dev/tools/pdf-toolkit',
+    canonical: 'https://xeroping.online/tools/pdf-toolkit',
   },
   keywords: [
     'secure pdf merger', 'offline pdf editor', 'split pdf locally',
@@ -18,16 +18,16 @@ export const metadata = {
   openGraph: {
     title: 'Secure PDF Toolkit | Merge, Split & Edit PDFs Offline',
     description: 'Merge, split, compress, and e-sign PDF documents locally. Your files never leave your device.',
-    images: [{ url: 'https://zeronode.dev/og/pdf-toolkit.png', width: 1200, height: 630 }],
-    url: 'https://zeronode.dev/tools/pdf-toolkit',
+    images: [{ url: 'https://xeroping.online/og/pdf-toolkit.png', width: 1200, height: 630 }],
+    url: 'https://xeroping.online/tools/pdf-toolkit',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@ZeroNodeDev',
+    site: '@Zero PingDev',
     title: 'Secure PDF Toolkit | Merge, Split & Edit PDFs Offline',
     description: 'Merge, split, compress, and e-sign PDFs locally. No uploads. HIPAA-safe.',
-    images: ['https://zeronode.dev/og/pdf-toolkit.png'],
+    images: ['https://xeroping.online/og/pdf-toolkit.png'],
   },
 };
 
@@ -38,15 +38,15 @@ export default function PdfToolkitPage() {
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "ZeroNode", "item": "https://zeronode.dev" },
-          { "@type": "ListItem", "position": 2, "name": "PDF Toolkit", "item": "https://zeronode.dev/tools/pdf-toolkit" }
+          { "@type": "ListItem", "position": 1, "name": "Zero Ping", "item": "https://xeroping.online" },
+          { "@type": "ListItem", "position": 2, "name": "PDF Toolkit", "item": "https://xeroping.online/tools/pdf-toolkit" }
         ]
       },
       {
         "@type": "WebApplication",
-        "@id": "https://zeronode.dev/tools/pdf-toolkit/#app",
-        "name": "ZeroNode Secure PDF Toolkit",
-        "url": "https://zeronode.dev/tools/pdf-toolkit",
+        "@id": "https://xeroping.online/tools/pdf-toolkit/#app",
+        "name": "Zero Ping Secure PDF Toolkit",
+        "url": "https://xeroping.online/tools/pdf-toolkit",
         "description": "Merge, split, compress, watermark, and e-sign PDFs entirely in your browser. No file uploads. HIPAA-aligned for sensitive legal and financial documents.",
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "Windows, macOS, Linux, ChromeOS",
@@ -66,13 +66,13 @@ export default function PdfToolkitPage() {
       {
         "@type": "HowTo",
         "name": "How to merge PDF files without uploading them",
-        "description": "Step-by-step guide to combining multiple PDF documents into one file locally in your browser using ZeroNode.",
+        "description": "Step-by-step guide to combining multiple PDF documents into one file locally in your browser using Zero Ping.",
         "step": [
           {
             "@type": "HowToStep",
             "position": 1,
             "name": "Open the PDF Toolkit",
-            "text": "Navigate to ZeroNode's PDF Toolkit at zeronode.dev/tools/pdf-toolkit. No account or login is required."
+            "text": "Navigate to Zero Ping's PDF Toolkit at xeroping.online/tools/pdf-toolkit. No account or login is required."
           },
           {
             "@type": "HowToStep",
@@ -99,10 +99,10 @@ export default function PdfToolkitPage() {
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "Is ZeroNode's PDF editor HIPAA compliant?",
+            "name": "Is Zero Ping's PDF editor HIPAA compliant?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "ZeroNode processes all PDF files locally in your browser — files are never transmitted to external servers. This zero-upload architecture means sensitive protected health information (PHI) stays on your device, supporting HIPAA compliance workflows. Always consult your compliance officer for formal assessments."
+              "text": "Zero Ping processes all PDF files locally in your browser â€” files are never transmitted to external servers. This zero-upload architecture means sensitive protected health information (PHI) stays on your device, supporting HIPAA compliance workflows. Always consult your compliance officer for formal assessments."
             }
           },
           {
@@ -110,7 +110,7 @@ export default function PdfToolkitPage() {
             "name": "Can I sign a PDF without uploading it?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes. ZeroNode's e-sign feature renders signature fields and draws your signature directly onto the PDF using the browser's Canvas API. The signed file is then downloaded. The document never leaves your device."
+              "text": "Yes. Zero Ping's e-sign feature renders signature fields and draws your signature directly onto the PDF using the browser's Canvas API. The signed file is then downloaded. The document never leaves your device."
             }
           },
           {
@@ -118,7 +118,7 @@ export default function PdfToolkitPage() {
             "name": "Is there a file size limit for PDF merging?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "ZeroNode has no server-side file size limit. The practical limit depends on your browser's available RAM. Most modern devices comfortably handle merges totalling several hundred megabytes."
+              "text": "Zero Ping has no server-side file size limit. The practical limit depends on your browser's available RAM. Most modern devices comfortably handle merges totalling several hundred megabytes."
             }
           }
         ]

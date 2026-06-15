@@ -1,8 +1,8 @@
 import React from 'react';
 
 export const metadata = {
-  title: 'Terms of Service | ZeroNode Utilities',
-  description: 'Terms of Service for ZeroNode Utilities',
+  title: 'Terms of Service | Zero Ping Utilities',
+  description: 'Terms of Service for Zero Ping Utilities',
 };
 
 export default function TermsOfService() {
@@ -13,12 +13,12 @@ export default function TermsOfService() {
       <p className="font-bold text-lg mb-6">Last Updated: June 2026</p>
 
       <p className="font-bold text-lg mb-6">
-        Please read these Terms of Service completely using ZeroNode Utilities. This Agreement documents the legally binding terms and conditions attached to the use of the Site at ZeroNode.
+        Please read these Terms of Service completely using Zero Ping Utilities. This Agreement documents the legally binding terms and conditions attached to the use of the Site at Zero Ping.
       </p>
 
       <h2 className="text-2xl font-black uppercase mt-8 mb-4 border-b-[2px] border-summer-space pb-2">1. Intellectual Property</h2>
       <p className="mb-6 font-bold">
-        The Site and all of its original content are the sole property of ZeroNode and are, as such, fully protected by the appropriate international copyright and other intellectual property rights laws.
+        The Site and all of its original content are the sole property of Zero Ping and are, as such, fully protected by the appropriate international copyright and other intellectual property rights laws.
       </p>
 
       <h2 className="text-2xl font-black uppercase mt-8 mb-4 border-b-[2px] border-summer-space pb-2">2. Acceptable Use</h2>
@@ -33,7 +33,7 @@ export default function TermsOfService() {
 
       <h2 className="text-2xl font-black uppercase mt-8 mb-4 border-b-[2px] border-summer-space pb-2">4. Limitation of Liability</h2>
       <p className="mb-6 font-bold">
-        In no event shall ZeroNode, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for damages, direct or indirect, arising out of or in connection with your use of the Service.
+        In no event shall Zero Ping, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for damages, direct or indirect, arising out of or in connection with your use of the Service.
       </p>
 
       <h2 className="text-2xl font-black uppercase mt-8 mb-4 border-b-[2px] border-summer-space pb-2">5. Governing Law</h2>

@@ -2,9 +2,9 @@ import TextRedactorClient from './TextRedactorClient';
 
 export const metadata = {
   title: 'Text Redactor | Sanitize Logs & Mask PII Locally',
-  description: 'Instantly redact API keys, PII, and passwords from logs before sharing them. 100% client-side sanitization — your raw logs are never uploaded to a server.',
+  description: 'Instantly redact API keys, PII, and passwords from logs before sharing them. 100% client-side sanitization â€” your raw logs are never uploaded to a server.',
   alternates: {
-    canonical: 'https://zeronode.dev/tools/text-redactor',
+    canonical: 'https://xeroping.online/tools/text-redactor',
   },
   keywords: [
     'local text redactor', 'offline log sanitizer', 'remove api keys from text',
@@ -16,16 +16,16 @@ export const metadata = {
   openGraph: {
     title: 'Text Redactor | Sanitize Logs & Mask PII Locally',
     description: 'Redact API keys, PII, and passwords from logs locally. No uploads.',
-    images: [{ url: 'https://zeronode.dev/og/text-redactor.png', width: 1200, height: 630 }],
-    url: 'https://zeronode.dev/tools/text-redactor',
+    images: [{ url: 'https://xeroping.online/og/text-redactor.png', width: 1200, height: 630 }],
+    url: 'https://xeroping.online/tools/text-redactor',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@ZeroNodeDev',
+    site: '@Zero PingDev',
     title: 'Text Redactor | Sanitize Logs Locally',
     description: 'Client-side log sanitizer. Mask API keys and PII securely.',
-    images: ['https://zeronode.dev/og/text-redactor.png'],
+    images: ['https://xeroping.online/og/text-redactor.png'],
   },
 };
 
@@ -36,15 +36,15 @@ export default function TextRedactorPage() {
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "ZeroNode", "item": "https://zeronode.dev" },
-          { "@type": "ListItem", "position": 2, "name": "Text Redactor", "item": "https://zeronode.dev/tools/text-redactor" }
+          { "@type": "ListItem", "position": 1, "name": "Zero Ping", "item": "https://xeroping.online" },
+          { "@type": "ListItem", "position": 2, "name": "Text Redactor", "item": "https://xeroping.online/tools/text-redactor" }
         ]
       },
       {
         "@type": "WebApplication",
-        "@id": "https://zeronode.dev/tools/text-redactor/#app",
-        "name": "ZeroNode Local Text Redactor",
-        "url": "https://zeronode.dev/tools/text-redactor",
+        "@id": "https://xeroping.online/tools/text-redactor/#app",
+        "name": "Zero Ping Local Text Redactor",
+        "url": "https://xeroping.online/tools/text-redactor",
         "description": "Regex-powered client-side text sanitizer. Automatically finds and masks API keys, passwords, IPs, emails, and credit cards without uploading your data.",
         "applicationCategory": "SecurityApplication",
         "operatingSystem": "All",

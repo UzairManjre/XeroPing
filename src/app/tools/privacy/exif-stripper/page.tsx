@@ -4,7 +4,7 @@ export const metadata = {
   title: 'EXIF Data Remover | Strip Photo Metadata & GPS Locally',
   description: 'Instantly erase hidden GPS coordinates, camera models, and EXIF metadata from your photos. Secure, client-side scrubbing ensures total privacy before you post.',
   alternates: {
-    canonical: 'https://zeronode.dev/tools/privacy/exif-stripper',
+    canonical: 'https://xeroping.online/tools/privacy/exif-stripper',
   },
   keywords: [
     'remove exif data locally', 'strip photo metadata browser', 'delete iphone gps location photo',
@@ -19,16 +19,16 @@ export const metadata = {
   openGraph: {
     title: 'EXIF Data Remover | Strip Photo Metadata & GPS Locally',
     description: 'Erase GPS coordinates, camera models, and EXIF metadata from photos entirely in your browser. No uploads.',
-    images: [{ url: 'https://zeronode.dev/og/exif-stripper.png', width: 1200, height: 630 }],
-    url: 'https://zeronode.dev/tools/privacy/exif-stripper',
+    images: [{ url: 'https://xeroping.online/og/exif-stripper.png', width: 1200, height: 630 }],
+    url: 'https://xeroping.online/tools/privacy/exif-stripper',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@ZeroNodeDev',
+    site: '@Zero PingDev',
     title: 'EXIF Data Remover | Strip GPS & Metadata Locally',
     description: 'Erase GPS coordinates and EXIF metadata from photos client-side. No uploads.',
-    images: ['https://zeronode.dev/og/exif-stripper.png'],
+    images: ['https://xeroping.online/og/exif-stripper.png'],
   },
 };
 
@@ -39,16 +39,16 @@ export default function ExifStripperPage() {
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "ZeroNode", "item": "https://zeronode.dev" },
-          { "@type": "ListItem", "position": 2, "name": "Privacy Tools", "item": "https://zeronode.dev/tools/privacy" },
-          { "@type": "ListItem", "position": 3, "name": "EXIF Stripper", "item": "https://zeronode.dev/tools/privacy/exif-stripper" }
+          { "@type": "ListItem", "position": 1, "name": "Zero Ping", "item": "https://xeroping.online" },
+          { "@type": "ListItem", "position": 2, "name": "Privacy Tools", "item": "https://xeroping.online/tools/privacy" },
+          { "@type": "ListItem", "position": 3, "name": "EXIF Stripper", "item": "https://xeroping.online/tools/privacy/exif-stripper" }
         ]
       },
       {
         "@type": "WebApplication",
-        "@id": "https://zeronode.dev/tools/privacy/exif-stripper/#app",
-        "name": "ZeroNode EXIF Data Stripper",
-        "url": "https://zeronode.dev/tools/privacy/exif-stripper",
+        "@id": "https://xeroping.online/tools/privacy/exif-stripper/#app",
+        "name": "Zero Ping EXIF Data Stripper",
+        "url": "https://xeroping.online/tools/privacy/exif-stripper",
         "description": "Batch-remove GPS coordinates, camera model, lens data, and all EXIF metadata from photos entirely in your browser. Zero uploads.",
         "applicationCategory": "UtilitiesApplication",
         "operatingSystem": "Windows, macOS, Linux, Android, iOS",
@@ -59,7 +59,7 @@ export default function ExifStripperPage() {
           "Remove GPS coordinates from any photo format",
           "Strip camera make, model, and lens EXIF data",
           "Batch process multiple images simultaneously",
-          "Zero-upload — files never leave your device",
+          "Zero-upload â€” files never leave your device",
           "Works on JPEG, PNG, HEIC, and TIFF"
         ]
       },
@@ -68,10 +68,10 @@ export default function ExifStripperPage() {
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "What EXIF data does ZeroNode remove from photos?",
+            "name": "What EXIF data does Zero Ping remove from photos?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "ZeroNode strips all standard EXIF fields including GPS latitude/longitude/altitude, camera make and model, lens specifications, shutter speed, aperture, ISO, date/time taken, and software tags. The output image is a clean file with no embedded metadata."
+              "text": "Zero Ping strips all standard EXIF fields including GPS latitude/longitude/altitude, camera make and model, lens specifications, shutter speed, aperture, ISO, date/time taken, and software tags. The output image is a clean file with no embedded metadata."
             }
           },
           {
@@ -87,7 +87,7 @@ export default function ExifStripperPage() {
             "name": "Can I remove location data from iPhone photos on a PC?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes. ZeroNode's EXIF Stripper runs entirely in the browser and works with iPhone HEIC and JPEG files on Windows, macOS, or Linux without requiring any software installation."
+              "text": "Yes. Zero Ping's EXIF Stripper runs entirely in the browser and works with iPhone HEIC and JPEG files on Windows, macOS, or Linux without requiring any software installation."
             }
           }
         ]

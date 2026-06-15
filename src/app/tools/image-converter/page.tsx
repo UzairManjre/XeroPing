@@ -4,7 +4,7 @@ export const metadata = {
   title: 'Batch Image Converter & Compressor | 100% Local Processing',
   description: 'Batch convert and compress massive images to WebP, AVIF, HEIC, JPEG, and PNG. 100% private browser-based processing. No file uploads, instant downloads.',
   alternates: {
-    canonical: 'https://zeronode.dev/tools/image-converter',
+    canonical: 'https://xeroping.online/tools/image-converter',
   },
   keywords: [
     'local image converter', 'offline image compressor', 'convert png to webp browser',
@@ -17,16 +17,16 @@ export const metadata = {
   openGraph: {
     title: 'Batch Image Converter & Compressor | 100% Local Processing',
     description: 'Batch convert and compress massive images to WebP, AVIF, HEIC, JPEG, and PNG. No file uploads.',
-    images: [{ url: 'https://zeronode.dev/og/image-converter.png', width: 1200, height: 630 }],
-    url: 'https://zeronode.dev/tools/image-converter',
+    images: [{ url: 'https://xeroping.online/og/image-converter.png', width: 1200, height: 630 }],
+    url: 'https://xeroping.online/tools/image-converter',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@ZeroNodeDev',
+    site: '@Zero PingDev',
     title: 'Batch Image Converter & Compressor | 100% Local Processing',
     description: 'Batch convert massive images to WebP, AVIF, HEIC locally. No uploads.',
-    images: ['https://zeronode.dev/og/image-converter.png'],
+    images: ['https://xeroping.online/og/image-converter.png'],
   },
 };
 
@@ -37,15 +37,15 @@ export default function ImageConverterPage() {
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "ZeroNode", "item": "https://zeronode.dev" },
-          { "@type": "ListItem", "position": 2, "name": "Image Converter", "item": "https://zeronode.dev/tools/image-converter" }
+          { "@type": "ListItem", "position": 1, "name": "Zero Ping", "item": "https://xeroping.online" },
+          { "@type": "ListItem", "position": 2, "name": "Image Converter", "item": "https://xeroping.online/tools/image-converter" }
         ]
       },
       {
         "@type": "WebApplication",
-        "@id": "https://zeronode.dev/tools/image-converter/#app",
-        "name": "ZeroNode Local Image Converter",
-        "url": "https://zeronode.dev/tools/image-converter",
+        "@id": "https://xeroping.online/tools/image-converter/#app",
+        "name": "Zero Ping Local Image Converter",
+        "url": "https://xeroping.online/tools/image-converter",
         "description": "Batch convert and compress images to WebP, AVIF, HEIC, JPEG, and PNG entirely in your browser with no file uploads.",
         "applicationCategory": "MultimediaApplication",
         "operatingSystem": "Windows, macOS, Linux, ChromeOS, Android, iOS",
@@ -59,7 +59,7 @@ export default function ImageConverterPage() {
           "Zero-upload architecture",
           "No file size limits (RAM-bound only)"
         ],
-        "screenshot": "https://zeronode.dev/screenshots/image-converter.png"
+        "screenshot": "https://xeroping.online/screenshots/image-converter.png"
       },
       {
         "@type": "FAQPage",
@@ -69,23 +69,23 @@ export default function ImageConverterPage() {
             "name": "Is there a file size limit for image compression?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "There is no server-imposed limit because ZeroNode processes files directly on your device. The practical ceiling is your computer's available RAM — most modern machines handle 100MB+ images without issue."
+              "text": "There is no server-imposed limit because Zero Ping processes files directly on your device. The practical ceiling is your computer's available RAM â€” most modern machines handle 100MB+ images without issue."
             }
           },
           {
             "@type": "Question",
-            "name": "Does ZeroNode upload my images to a server?",
+            "name": "Does Zero Ping upload my images to a server?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "No. ZeroNode's image converter runs entirely in your browser using WebAssembly and the HTML5 Canvas API. Your files never leave your device and are discarded from memory when you close the tab."
+              "text": "No. Zero Ping's image converter runs entirely in your browser using WebAssembly and the HTML5 Canvas API. Your files never leave your device and are discarded from memory when you close the tab."
             }
           },
           {
             "@type": "Question",
-            "name": "Which image formats does ZeroNode support?",
+            "name": "Which image formats does Zero Ping support?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "ZeroNode supports input and output in WebP, AVIF, HEIC, JPEG, PNG, and TIFF. Batch conversion across formats is supported in a single pass."
+              "text": "Zero Ping supports input and output in WebP, AVIF, HEIC, JPEG, PNG, and TIFF. Batch conversion across formats is supported in a single pass."
             }
           }
         ]

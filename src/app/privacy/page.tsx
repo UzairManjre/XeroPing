@@ -1,8 +1,8 @@
 import React from 'react';
 
 export const metadata = {
-  title: 'Privacy Policy | ZeroNode Utilities',
-  description: 'Privacy Policy for ZeroNode Utilities',
+  title: 'Privacy Policy | Zero Ping Utilities',
+  description: 'Privacy Policy for Zero Ping Utilities',
 };
 
 export default function PrivacyPolicy() {
@@ -13,7 +13,7 @@ export default function PrivacyPolicy() {
       <p className="font-bold text-lg mb-6">Last Updated: June 2026</p>
 
       <p className="font-bold text-lg mb-6">
-        At ZeroNode Utilities, we take your privacy extremely seriously. <strong>All file processing is done locally in the browser. No files are uploaded, stored, or transmitted to our servers.</strong>
+        At Zero Ping Utilities, we take your privacy extremely seriously. <strong>All file processing is done locally in the browser. No files are uploaded, stored, or transmitted to our servers.</strong>
       </p>
 
       <h2 className="text-2xl font-black uppercase mt-8 mb-4 border-b-[2px] border-summer-space pb-2">1. Local Processing</h2>

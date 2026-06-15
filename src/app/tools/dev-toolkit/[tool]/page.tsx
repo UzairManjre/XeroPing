@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: { params: Promise<{ tool: str
     title: 'Local Dev Utilities | JWT Decoder, SVG to JSX, Hash Generator',
     description: 'Essential, zero-tracking utilities for engineers. Decode JWT payloads safely, convert SVGs to React JSX, and generate SHA-256 hashes entirely client-side.',
     alternates: {
-      canonical: `https://zeronode.dev/tools/dev-toolkit/${tool}`,
+      canonical: `https://xeroping.online/tools/dev-toolkit/${tool}`,
     },
     keywords: [
       'local jwt decoder', 'secure hash generator', 'md5 sha256 offline browser',
@@ -38,16 +38,16 @@ export async function generateMetadata({ params }: { params: Promise<{ tool: str
     openGraph: {
       title: 'Local Dev Utilities | JWT Decoder, SVG to JSX, Hash Generator',
       description: 'Decode JWTs, convert SVGs to JSX, and generate hashes locally. No logs. No tracking.',
-      images: [{ url: 'https://zeronode.dev/og/dev-toolkit.png', width: 1200, height: 630 }],
-      url: `https://zeronode.dev/tools/dev-toolkit/${tool}`,
+      images: [{ url: 'https://xeroping.online/og/dev-toolkit.png', width: 1200, height: 630 }],
+      url: `https://xeroping.online/tools/dev-toolkit/${tool}`,
       type: 'website',
     },
     twitter: {
       card: 'summary_large_image',
-      site: '@ZeroNodeDev',
+      site: '@Zero PingDev',
       title: 'Local Dev Utilities | JWT Decoder, SVG to JSX, Hash Generator',
       description: 'Decode JWTs, generate SHA-256 hashes, and convert SVGs to JSX — all client-side.',
-      images: ['https://zeronode.dev/og/dev-toolkit.png'],
+      images: ['https://xeroping.online/og/dev-toolkit.png'],
     },
   };
 }
@@ -63,15 +63,15 @@ export default async function Page({ params }: { params: Promise<{ tool: string 
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "ZeroNode", "item": "https://zeronode.dev" },
-          { "@type": "ListItem", "position": 2, "name": "Dev Toolkit", "item": "https://zeronode.dev/tools/dev-toolkit" }
+          { "@type": "ListItem", "position": 1, "name": "Zero Ping", "item": "https://xeroping.online" },
+          { "@type": "ListItem", "position": 2, "name": "Dev Toolkit", "item": "https://xeroping.online/tools/dev-toolkit" }
         ]
       },
       {
         "@type": "WebApplication",
-        "@id": "https://zeronode.dev/tools/dev-toolkit/#app",
-        "name": "ZeroNode Dev Toolkit",
-        "url": "https://zeronode.dev/tools/dev-toolkit",
+        "@id": "https://xeroping.online/tools/dev-toolkit/#app",
+        "name": "Zero Ping Dev Toolkit",
+        "url": "https://xeroping.online/tools/dev-toolkit",
         "description": "Zero-tracking browser utilities for engineers: JWT decoder, SVG-to-JSX compiler, SHA-256/MD5/bcrypt hash generator, Base64 encoder, and cron expression parser.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Windows, macOS, Linux",
@@ -89,13 +89,13 @@ export default async function Page({ params }: { params: Promise<{ tool: string 
       {
         "@type": "HowTo",
         "name": "How to decode a JWT token without sending it to a server",
-        "description": "Step-by-step guide to safely inspecting a JWT payload client-side using ZeroNode.",
+        "description": "Step-by-step guide to safely inspecting a JWT payload client-side using Zero Ping.",
         "step": [
           {
             "@type": "HowToStep",
             "position": 1,
             "name": "Open the Dev Toolkit",
-            "text": "Navigate to zeronode.dev/tools/dev-toolkit and select the JWT tab."
+            "text": "Navigate to xeroping.online/tools/dev-toolkit and select the JWT tab."
           },
           {
             "@type": "HowToStep",
@@ -116,18 +116,18 @@ export default async function Page({ params }: { params: Promise<{ tool: string 
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "Is it safe to paste a production JWT into ZeroNode?",
+            "name": "Is it safe to paste a production JWT into Zero Ping?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes. ZeroNode decodes JWT tokens entirely in your browser using JavaScript — the token string is never transmitted to any server or logged. This makes it significantly safer than cloud-based JWT debuggers that process tokens server-side."
+              "text": "Yes. Zero Ping decodes JWT tokens entirely in your browser using JavaScript — the token string is never transmitted to any server or logged. This makes it significantly safer than cloud-based JWT debuggers that process tokens server-side."
             }
           },
           {
             "@type": "Question",
-            "name": "Which hash algorithms does ZeroNode support?",
+            "name": "Which hash algorithms does Zero Ping support?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "ZeroNode's hash generator supports MD5, SHA-1, SHA-256, SHA-512, and bcrypt. All hashing runs locally via the Web Crypto API (SubtleCrypto) with no external dependencies for SHA variants."
+              "text": "Zero Ping's hash generator supports MD5, SHA-1, SHA-256, SHA-512, and bcrypt. All hashing runs locally via the Web Crypto API (SubtleCrypto) with no external dependencies for SHA variants."
             }
           },
           {
@@ -135,7 +135,7 @@ export default async function Page({ params }: { params: Promise<{ tool: string 
             "name": "Can I convert an SVG file to a React component without a build step?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes. ZeroNode's SVG-to-JSX converter parses SVG markup and outputs a valid React functional component in your browser. It handles attribute renaming (class to className, etc.), removes XML declarations, and optionally wraps in TypeScript types."
+              "text": "Yes. Zero Ping's SVG-to-JSX converter parses SVG markup and outputs a valid React functional component in your browser. It handles attribute renaming (class to className, etc.), removes XML declarations, and optionally wraps in TypeScript types."
             }
           }
         ]

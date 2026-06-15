@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 
 export const dynamic = 'force-static';
 
-const BASE = 'https://zeronode.dev';
+const BASE = 'https://xeroping.online';
 const FORMATS = ['png', 'jpg', 'jpeg', 'webp', 'avif', 'heic', 'tiff', 'gif'];
 
 export default function sitemap(): MetadataRoute.Sitemap {

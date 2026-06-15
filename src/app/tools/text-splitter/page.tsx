@@ -4,7 +4,7 @@ export const metadata = {
   title: 'Text Splitter & Regex Parser | Chunk Strings Locally',
   description: 'Split massive text blocks by character limits, delimiters, or complex Regex patterns. Processes 100% locally in your browser for total privacy.',
   alternates: {
-    canonical: 'https://zeronode.dev/tools/text-splitter',
+    canonical: 'https://xeroping.online/tools/text-splitter',
   },
   keywords: [
     'local text splitter', 'regex string parser browser', 'split text by length offline',
@@ -17,16 +17,16 @@ export const metadata = {
   openGraph: {
     title: 'Text Splitter & Regex Parser | Chunk Strings Locally',
     description: 'Split massive text blocks by length or Regex locally. No uploads.',
-    images: [{ url: 'https://zeronode.dev/og/text-splitter.png', width: 1200, height: 630 }],
-    url: 'https://zeronode.dev/tools/text-splitter',
+    images: [{ url: 'https://xeroping.online/og/text-splitter.png', width: 1200, height: 630 }],
+    url: 'https://xeroping.online/tools/text-splitter',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@ZeroNodeDev',
+    site: '@Zero PingDev',
     title: 'Text Splitter & Regex Parser | Chunk Strings Locally',
     description: 'Split text by length or Regex locally. No server limits.',
-    images: ['https://zeronode.dev/og/text-splitter.png'],
+    images: ['https://xeroping.online/og/text-splitter.png'],
   },
 };
 
@@ -37,15 +37,15 @@ export default function TextSplitterPage() {
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "ZeroNode", "item": "https://zeronode.dev" },
-          { "@type": "ListItem", "position": 2, "name": "Text Splitter", "item": "https://zeronode.dev/tools/text-splitter" }
+          { "@type": "ListItem", "position": 1, "name": "Zero Ping", "item": "https://xeroping.online" },
+          { "@type": "ListItem", "position": 2, "name": "Text Splitter", "item": "https://xeroping.online/tools/text-splitter" }
         ]
       },
       {
         "@type": "WebApplication",
-        "@id": "https://zeronode.dev/tools/text-splitter/#app",
-        "name": "ZeroNode Text Splitter & Parser",
-        "url": "https://zeronode.dev/tools/text-splitter",
+        "@id": "https://xeroping.online/tools/text-splitter/#app",
+        "name": "Zero Ping Text Splitter & Parser",
+        "url": "https://xeroping.online/tools/text-splitter",
         "description": "Chunk massive strings by character limits, symbols, or JavaScript Regex patterns entirely in your browser memory.",
         "applicationCategory": "UtilitiesApplication",
         "operatingSystem": "All",
@@ -67,7 +67,7 @@ export default function TextSplitterPage() {
             "name": "Can I split a text file that is too large to open in Notepad?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes. If your file crashes standard text editors, paste it into ZeroNode's splitter. Because it uses browser-native memory allocation without UI thread blocking during the split, it handles massive strings much better than standard desktop editors."
+              "text": "Yes. If your file crashes standard text editors, paste it into Zero Ping's splitter. Because it uses browser-native memory allocation without UI thread blocking during the split, it handles massive strings much better than standard desktop editors."
             }
           },
           {
@@ -75,7 +75,7 @@ export default function TextSplitterPage() {
             "name": "What flavor of Regex does the text splitter use?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "ZeroNode uses the ECMAScript (JavaScript) Regex engine running directly in your browser. This includes support for modern features like lookaheads, lookbehinds, and named capture groups (depending on browser version)."
+              "text": "Zero Ping uses the ECMAScript (JavaScript) Regex engine running directly in your browser. This includes support for modern features like lookaheads, lookbehinds, and named capture groups (depending on browser version)."
             }
           }
         ]

@@ -25,23 +25,23 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     keywords: `convert ${from} to ${to} offline, local ${from} converter, ${from} to ${to} without uploading, ${from} to ${to} no cloud, secure ${to} batch processor`,
 
     alternates: {
-      canonical: `https://zeronode.dev/tools/image-converter/${slug}`,
+      canonical: `https://xeroping.online/tools/image-converter/${slug}`,
     },
 
     openGraph: {
       title: `Convert ${from} to ${to} | 100% Local, No Uploads`,
       description: `Batch convert ${from} files to ${to} entirely in your browser. Zero uploads.`,
-      images: [{ url: 'https://zeronode.dev/og/image-converter.png', width: 1200, height: 630 }],
-      url: `https://zeronode.dev/tools/image-converter/${slug}`,
+      images: [{ url: 'https://xeroping.online/og/image-converter.png', width: 1200, height: 630 }],
+      url: `https://xeroping.online/tools/image-converter/${slug}`,
       type: 'website',
     },
 
     twitter: {
       card: 'summary_large_image',
-      site: '@ZeroNodeDev',
+      site: '@Zero PingDev',
       title: `Convert ${from} to ${to} Locally — No Uploads`,
       description: `Batch convert ${from} to ${to} in your browser. Private. No file size limits.`,
-      images: ['https://zeronode.dev/og/image-converter.png'],
+      images: ['https://xeroping.online/og/image-converter.png'],
     },
   };
 }
@@ -64,15 +64,15 @@ export default async function DynamicImageConverterPage({ params }: { params: Pr
               {
                 "@type": "BreadcrumbList",
                 "itemListElement": [
-                  { "@type": "ListItem", "position": 1, "name": "ZeroNode", "item": "https://zeronode.dev" },
-                  { "@type": "ListItem", "position": 2, "name": "Image Converter", "item": "https://zeronode.dev/tools/image-converter" },
-                  { "@type": "ListItem", "position": 3, "name": `Convert ${from} to ${to}`, "item": `https://zeronode.dev/tools/image-converter/${slug}` }
+                  { "@type": "ListItem", "position": 1, "name": "Zero Ping", "item": "https://xeroping.online" },
+                  { "@type": "ListItem", "position": 2, "name": "Image Converter", "item": "https://xeroping.online/tools/image-converter" },
+                  { "@type": "ListItem", "position": 3, "name": `Convert ${from} to ${to}`, "item": `https://xeroping.online/tools/image-converter/${slug}` }
                 ]
               },
               {
                 "@type": "WebApplication",
-                "name": `ZeroNode ${from} to ${to} Converter`,
-                "url": `https://zeronode.dev/tools/image-converter/${slug}`,
+                "name": `Zero Ping ${from} to ${to} Converter`,
+                "url": `https://xeroping.online/tools/image-converter/${slug}`,
                 "description": `Convert ${from} files to ${to} locally in your browser. No uploads, no file size limits.`,
                 "applicationCategory": "MultimediaApplication",
                 "isAccessibleForFree": true,
@@ -91,7 +91,7 @@ export default async function DynamicImageConverterPage({ params }: { params: Pr
             How to Convert {from} to {to} Locally
           </h2>
           <p className="font-bold text-summer-space/80 mb-6 text-lg">
-            Converting {from} files to {to} shouldn't require uploading sensitive data to cloud servers. The ZeroNode {from} to {to} converter executes entirely inside your browser using WebAssembly. This means your image files are processed instantaneously without leaving your device.
+            Converting {from} files to {to} shouldn't require uploading sensitive data to cloud servers. The Zero Ping {from} to {to} converter executes entirely inside your browser using WebAssembly. This means your image files are processed instantaneously without leaving your device.
           </p>
           
           <h3 className="text-2xl font-black uppercase tracking-tighter text-summer-space mb-4 mt-8">

@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Free Online SVG Optimizer | ZeroNode',
+  title: 'Free Online SVG Optimizer | Zero Ping',
   description: 'Minify and clean your vector graphics directly online using SVGO.',
   openGraph: {
     title: 'Free Online SVG Optimizer',

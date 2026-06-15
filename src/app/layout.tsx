@@ -11,10 +11,10 @@ const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains-mono" });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://zeronode.dev'),
+  metadataBase: new URL('https://xeroping.online'),
   title: {
-    template: '%s | ZeroNode',
-    default: 'ZeroNode | 100% Private, Local Developer Utilities',
+    template: '%s | Zero Ping',
+    default: 'Zero Ping | 100% Private, Local Developer Utilities',
   },
   description: 'A suite of lightning-fast, zero-server developer utilities. Convert formats, manipulate PDFs, and process massive datasets entirely in your browser. Zero uploads.',
   keywords: [
@@ -25,9 +25,9 @@ export const metadata: Metadata = {
     'ilovepdf alternative offline', 'smallpdf alternative no upload',
     'cloudconvert alternative local', 'tinypng alternative private',
   ],
-  authors: [{ name: 'ZeroNode Team' }],
-  creator: 'ZeroNode',
-  publisher: 'ZeroNode',
+  authors: [{ name: 'Zero Ping Team' }],
+  creator: 'Zero Ping',
+  publisher: 'Zero Ping',
   robots: {
     index: true,
     follow: true,
@@ -42,18 +42,18 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    siteName: 'ZeroNode',
-    title: 'ZeroNode | 100% Private, Local Developer Utilities',
+    siteName: 'Zero Ping',
+    title: 'Zero Ping | 100% Private, Local Developer Utilities',
     description: 'Lightning-fast, zero-server developer utilities running entirely in your browser. No uploads. No tracking.',
     images: [{ url: '/og/home.png', width: 1200, height: 630 }],
-    url: 'https://zeronode.dev',
+    url: 'https://xeroping.online',
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@ZeroNodeDev',
-    title: 'ZeroNode | 100% Private, Local Developer Utilities',
+    site: '@Zero PingDev',
+    title: 'Zero Ping | 100% Private, Local Developer Utilities',
     description: 'Lightning-fast, zero-server developer utilities running entirely in your browser. No uploads. No tracking.',
-    images: ['https://zeronode.dev/og/home.png'],
+    images: ['https://xeroping.online/og/home.png'],
   },
 };
 
@@ -73,33 +73,33 @@ export default function RootLayout({
               "@graph": [
                 {
                   "@type": "WebSite",
-                  "@id": "https://zeronode.dev/#website",
-                  "url": "https://zeronode.dev",
-                  "name": "ZeroNode",
+                  "@id": "https://xeroping.online/#website",
+                  "url": "https://xeroping.online",
+                  "name": "Zero Ping",
                   "description": "100% private, local developer utilities. Zero uploads.",
                   "potentialAction": {
                     "@type": "SearchAction",
                     "target": {
                       "@type": "EntryPoint",
-                      "urlTemplate": "https://zeronode.dev/search?q={search_term_string}"
+                      "urlTemplate": "https://xeroping.online/search?q={search_term_string}"
                     },
                     "query-input": "required name=search_term_string"
                   }
                 },
                 {
                   "@type": "Organization",
-                  "@id": "https://zeronode.dev/#organization",
-                  "name": "ZeroNode",
-                  "url": "https://zeronode.dev",
+                  "@id": "https://xeroping.online/#organization",
+                  "name": "Zero Ping",
+                  "url": "https://xeroping.online",
                   "logo": {
                     "@type": "ImageObject",
-                    "url": "https://zeronode.dev/logo.png",
+                    "url": "https://xeroping.online/logo.png",
                     "width": 512,
                     "height": 512
                   },
                   "sameAs": [
-                    "https://twitter.com/ZeroNodeDev",
-                    "https://github.com/zeronode"
+                    "https://twitter.com/Zero PingDev",
+                    "https://github.com/Zero Ping"
                   ]
                 }
               ]
@@ -128,7 +128,7 @@ export default function RootLayout({
           <footer className="mt-16 border-t-[4px] border-summer-space bg-white py-12 px-8">
             <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               <div>
-                <h3 className="font-black text-xl uppercase text-summer-space mb-4 border-b-[2px] border-summer-space pb-2">ZeroNode</h3>
+                <h3 className="font-black text-xl uppercase text-summer-space mb-4 border-b-[2px] border-summer-space pb-2">Zero Ping</h3>
                 <p className="font-bold text-sm text-summer-space/80">Providing fast, local developer tools. All processing happens safely inside your browser.</p>
               </div>
               <div>

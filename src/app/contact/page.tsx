@@ -1,8 +1,8 @@
 import React from 'react';
 
 export const metadata = {
-  title: 'Contact Us | ZeroNode Utilities',
-  description: 'Contact ZeroNode Utilities',
+  title: 'Contact Us | Zero Ping Utilities',
+  description: 'Contact Zero Ping Utilities',
 };
 
 export default function ContactUs() {

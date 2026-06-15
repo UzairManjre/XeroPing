@@ -36,10 +36,10 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* ── MOBILE TOP HEADER ── */}
+      {/* â”€â”€ MOBILE TOP HEADER â”€â”€ */}
       <header className="lg:hidden w-full bg-summer-sea border-b-[4px] border-summer-space sticky top-0 z-50 flex items-center justify-between px-5 py-3">
         <Link href="/" className="block">
-          <h1 className="text-xl font-black text-summer-space uppercase tracking-tighter leading-none">ZeroNode</h1>
+          <h1 className="text-xl font-black text-summer-space uppercase tracking-tighter leading-none">Zero Ping</h1>
           <p className="text-[9px] font-bold text-summer-space/70 uppercase tracking-widest mt-0.5">Utility Network</p>
         </Link>
         <button
@@ -51,7 +51,7 @@ export default function Sidebar() {
         </button>
       </header>
 
-      {/* ── DARK BACKDROP (mobile only) ── */}
+      {/* â”€â”€ DARK BACKDROP (mobile only) â”€â”€ */}
       {isOpen && (
         <div
           className="lg:hidden fixed inset-0 bg-summer-space/50 z-40 backdrop-blur-sm"
@@ -60,7 +60,7 @@ export default function Sidebar() {
         />
       )}
 
-      {/* ── SIDEBAR ── */}
+      {/* â”€â”€ SIDEBAR â”€â”€ */}
       <aside
         className={`
           bg-summer-sea border-summer-space flex flex-col shrink-0 z-40 overflow-hidden
@@ -74,7 +74,7 @@ export default function Sidebar() {
         {/* Sidebar Logo Header */}
         <div className="p-5 lg:p-6 border-b-[4px] border-summer-space bg-summer-amber flex items-center justify-between">
           <Link href="/" onClick={closeMenu} className="block">
-            <h1 className="text-2xl font-black text-summer-space uppercase tracking-tighter leading-none">ZeroNode</h1>
+            <h1 className="text-2xl font-black text-summer-space uppercase tracking-tighter leading-none">Zero Ping</h1>
             <p className="text-xs font-bold text-summer-space/70 uppercase tracking-widest mt-1">Utility Network</p>
           </Link>
           {/* Close X only visible on mobile inside drawer */}
@@ -140,11 +140,11 @@ export default function Sidebar() {
               onClick={closeMenu}
               className="flex items-center gap-3 px-4 py-3 bg-rose-500 hover:bg-rose-600 border-[3px] border-summer-space text-white font-black uppercase tracking-wider transition-all shadow-brutal hover:shadow-brutal-hover hover:translate-x-1 hover:translate-y-1"
             >
-              <Coffee className="w-5 h-5 shrink-0" /> Support Us ❤️
+              <Coffee className="w-5 h-5 shrink-0" /> Support Us â¤ï¸
             </Link>
           </div>
 
-          {/* Skyscraper Ad – Desktop only */}
+          {/* Skyscraper Ad â€“ Desktop only */}
           <div className="hidden lg:flex mt-6 mb-2 justify-center w-full px-2">
             <AdUnit width={160} height={600} />
           </div>

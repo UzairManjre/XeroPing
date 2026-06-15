@@ -1,7 +1,7 @@
 import ExifRemoverClient from './ExifRemoverClient';
 
 export const metadata = {
-  title: 'Free Online EXIF Remover & Metadata Editor | Remove GPS Location | ZeroNode',
+  title: 'Free Online EXIF Remover & Metadata Editor | Remove GPS Location | Zero Ping',
   description: 'Instantly strip hidden EXIF metadata, delete GPS locations, or edit camera tags online for free. Protect your privacy before uploading photos.',
   keywords: 'exif remover, delete exif data online, strip gps location from photo, edit exif metadata, online photo privacy tool'
 };
