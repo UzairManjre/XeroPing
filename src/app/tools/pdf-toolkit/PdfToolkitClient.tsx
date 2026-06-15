@@ -117,7 +117,7 @@ export default function PdfToolkitClient() {
         canvas.height = viewport.height;
         canvas.width = viewport.width;
         if (context) {
-          await page.render({ canvasContext: context, viewport }).promise;
+          await page.render({ canvasContext: context, viewport } as any).promise;
           const dataUrl = canvas.toDataURL('image/jpeg');
           setFiles(prev => prev.map(f => f.id === pdfFile.id ? { ...f, previewUrl: dataUrl } : f));
         }
