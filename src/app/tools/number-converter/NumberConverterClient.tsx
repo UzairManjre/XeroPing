@@ -44,23 +44,59 @@ export default function NumberConverterClient() {
       const fromRadix = getBaseRadix(baseFrom);
       const toRadix = getBaseRadix(baseTo);
       
-      // Parse to decimal first
-      const decimalValue = parseInt(baseInput, fromRadix);
-      if (isNaN(decimalValue)) throw new Error('Invalid input for selected base');
+      // Parse to decimal first, supporting floats
+      let decimalValue = 0;
+      const cleanInput = baseInput.trim();
+      const isNegative = cleanInput.startsWith('-');
+      const absInput = isNegative ? cleanInput.slice(1) : cleanInput;
 
-      const result = decimalValue.toString(toRadix).toUpperCase();
+      if (absInput.includes('.')) {
+        const parts = absInput.split('.');
+        if (parts.length > 2) throw new Error('Invalid input');
+        
+        const intStr = parts[0] || '0';
+        const fracStr = parts[1] || '';
+        
+        let intPart = parseInt(intStr, fromRadix);
+        if (isNaN(intPart) && intStr !== '0') throw new Error('Invalid input');
+        if (isNaN(intPart)) intPart = 0;
+        
+        let fracPart = 0;
+        for (let i = 0; i < fracStr.length; i++) {
+          const digit = parseInt(fracStr[i], fromRadix);
+          if (isNaN(digit)) throw new Error('Invalid input');
+          fracPart += digit / Math.pow(fromRadix, i + 1);
+        }
+        decimalValue = intPart + fracPart;
+      } else {
+        decimalValue = parseInt(absInput, fromRadix);
+        if (isNaN(decimalValue)) throw new Error('Invalid input for selected base');
+      }
+      
+      if (isNegative) decimalValue = -decimalValue;
+
+      let result = decimalValue.toString(toRadix).toUpperCase();
+      
+      // Preserve trailing dot if user typed it
+      if (baseInput.endsWith('.') && !result.includes('.')) {
+        result += '.';
+      }
 
       // Generate steps if converting to decimal
       let steps = '';
       if (baseTo === 'decimal' && baseFrom !== 'decimal') {
-        const digits = baseInput.split('');
-        const parts = digits.map((d, i) => {
-          const power = digits.length - 1 - i;
-          return `${d.toUpperCase()}×${fromRadix}^${power}`;
-        });
-        steps = `${baseInput} = ${parts.join(' + ')} = ${result}`;
+        if (!baseInput.includes('.')) {
+          const digits = absInput.split('');
+          const parts = digits.map((d, i) => {
+            const power = digits.length - 1 - i;
+            return `${d.toUpperCase()}×${fromRadix}^${power}`;
+          });
+          steps = `${absInput} = ${parts.join(' + ')} = ${Math.abs(decimalValue)}`;
+        } else {
+          steps = `Converted floating-point number ${baseInput} from Base ${fromRadix} to Base 10.`;
+        }
       } else if (baseFrom === 'decimal' && baseTo !== 'decimal') {
-        steps = `Repeatedly divide ${baseInput} by ${toRadix} and record remainders.`;
+        steps = `Divide integer part by ${toRadix} and multiply fractional part by ${toRadix}.`;
       }
 
       return { result, steps, error: '' };

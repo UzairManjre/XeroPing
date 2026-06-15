@@ -279,6 +279,8 @@ export default function ImageConverter() {
       URL.revokeObjectURL(item.previewUrl);
       if (item.processedUrl) URL.revokeObjectURL(item.processedUrl);
     });
+    // Revoke the zip download URL to free memory
+    if (batchZipUrl) URL.revokeObjectURL(batchZipUrl);
     setBatchItems([]);
     setBatchZipUrl(null);
     setBatchStatus('idle');
@@ -344,10 +346,18 @@ export default function ImageConverter() {
       if (pdfDoc) {
         const pdfBytes = await pdfDoc.save({ useObjectStreams: true });
         const pdfBlob = new Blob([pdfBytes as any], { type: 'application/pdf' });
+        if (batchZipUrl) URL.revokeObjectURL(batchZipUrl); // revoke old URL before creating new
         setBatchZipUrl(URL.createObjectURL(pdfBlob));
+        // Release the PDFDocument from memory
+        (pdfDoc as any) = null;
       } else if (zip) {
         const zipBlob = await zip.generateAsync({ type: 'blob' });
+        if (batchZipUrl) URL.revokeObjectURL(batchZipUrl); // revoke old URL
         setBatchZipUrl(URL.createObjectURL(zipBlob));
+        // Nullify large objects to allow GC to reclaim memory immediately
+        (zip as any) = null;
+        // Also null out per-item blobs — they're now inside the zip
+        setBatchItems(prev => prev.map(item => ({ ...item, processedBlob: null })));
       }
       setBatchStatus('success');
     } catch (err) {

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Wrench, ShieldCheck, FileText, Image, Code, FileJson, Sparkles, Calculator } from "lucide-react";
 import AdUnit from "@/components/AdUnit";
 import AdBlockDetector from "@/components/AdBlockDetector";
+import Sidebar from "@/components/Sidebar";
 
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space-grotesk" });
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains-mono" });
@@ -106,89 +107,12 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} font-mono antialiased min-h-screen flex selection:bg-summer-tiger selection:text-summer-space`}>
-        {/* Sidebar Navigation - Brutalist */}
-        <aside className="w-64 bg-summer-sea border-r-[4px] border-summer-space flex flex-col h-screen sticky top-0 shrink-0">
-          <div className="p-6 border-b-[4px] border-summer-space bg-summer-amber">
-            <Link href="/" className="block">
-              <h1 className="text-2xl font-black text-summer-space uppercase tracking-tighter shadow-sm">ZeroNode</h1>
-              <p className="text-xs font-bold text-summer-space uppercase tracking-widest mt-1">Utility Network</p>
-            </Link>
-          </div>
-
-          <nav className="flex-1 p-4 space-y-3 overflow-y-auto">
-            <div className="text-xs font-black text-summer-space/80 uppercase tracking-widest mb-4 ml-2">Privacy Tools</div>
-            
-            <Link href="/tools/exif-remover" className="flex items-center gap-3 px-4 py-3 bg-summer-sky border-[3px] border-summer-space rounded-none text-summer-space font-bold transition-all shadow-brutal hover:shadow-brutal-hover hover:translate-x-1 hover:translate-y-1">
-              <ShieldCheck className="w-5 h-5 stroke-[2.5px]" />
-              EXIF Remover
-            </Link>
-
-            <Link href="/tools/image-ai" className="flex items-center gap-3 px-4 py-3 bg-summer-sky border-[3px] border-summer-space rounded-none text-summer-space font-bold transition-all shadow-brutal hover:shadow-brutal-hover hover:translate-x-1 hover:translate-y-1">
-              <Sparkles className="w-5 h-5 stroke-[2.5px]" />
-              Image AI (Bg Remover)
-            </Link>
-
-            <Link href="/tools/text-redactor" className="flex items-center gap-3 px-4 py-3 bg-summer-sky border-[3px] border-summer-space rounded-none text-summer-space font-bold transition-all shadow-brutal hover:shadow-brutal-hover hover:translate-x-1 hover:translate-y-1">
-              <FileText className="w-5 h-5 stroke-[2.5px]" />
-              Text Redactor
-            </Link>
-            
-            <Link href="/tools/image-converter" className="flex items-center gap-3 px-4 py-3 bg-summer-sky border-[3px] border-summer-space rounded-none text-summer-space font-bold transition-all shadow-brutal hover:shadow-brutal-hover hover:translate-x-1 hover:translate-y-1">
-              <Image className="w-5 h-5 stroke-[2.5px]" />
-              Image Converter
-            </Link>
-            
-            <Link href="/tools/data-converter" className="flex items-center gap-3 px-4 py-3 bg-summer-sky border-[3px] border-summer-space rounded-none text-summer-space font-bold transition-all shadow-brutal hover:shadow-brutal-hover hover:translate-x-1 hover:translate-y-1">
-              <FileJson className="w-5 h-5 stroke-[2.5px]" />
-              Data Converter
-            </Link>
-            
-            <Link href="/tools/pdf-toolkit" className="flex items-center gap-3 px-4 py-3 bg-summer-sky border-[3px] border-summer-space rounded-none text-summer-space font-bold transition-all shadow-brutal hover:shadow-brutal-hover hover:translate-x-1 hover:translate-y-1">
-              <FileText className="w-5 h-5 stroke-[2.5px]" />
-              PDF Toolkit
-            </Link>
-
-            <div className="text-xs font-black text-summer-space/80 uppercase tracking-widest mb-4 mt-8 ml-2">Productivity Tools</div>
-
-            <Link href="/tools/dev-toolkit" className="flex items-center gap-3 px-4 py-3 bg-summer-sky border-[3px] border-summer-space rounded-none text-summer-space font-bold transition-all shadow-brutal hover:shadow-brutal-hover hover:translate-x-1 hover:translate-y-1">
-              <Code className="w-5 h-5 stroke-[2.5px]" />
-              Developer Toolkit
-            </Link>
-
-            <Link href="/tools/text-splitter" className="flex items-center gap-3 px-4 py-3 bg-summer-sky border-[3px] border-summer-space rounded-none text-summer-space font-bold transition-all shadow-brutal hover:shadow-brutal-hover hover:translate-x-1 hover:translate-y-1">
-              <FileText className="w-5 h-5 stroke-[2.5px]" />
-              Text Splitter
-            </Link>
-
-            <Link href="/tools/number-converter" className="flex items-center gap-3 px-4 py-3 bg-summer-sky border-[3px] border-summer-space rounded-none text-summer-space font-bold transition-all shadow-brutal hover:shadow-brutal-hover hover:translate-x-1 hover:translate-y-1">
-              <Calculator className="w-5 h-5 stroke-[2.5px]" />
-              Number Converter
-            </Link>
-
-            <Link href="/tools/unit-converter" className="flex items-center gap-3 px-4 py-3 bg-summer-sky border-[3px] border-summer-space rounded-none text-summer-space font-bold transition-all shadow-brutal hover:shadow-brutal-hover hover:translate-x-1 hover:translate-y-1">
-              <Wrench className="w-5 h-5 stroke-[2.5px]" />
-              All Converters
-            </Link>
-
-            <div className="mt-8 mb-4 flex justify-center w-full px-2">
-              <AdUnit width={160} height={600} />
-            </div>
-          </nav>
-
-          <div className="p-4 border-t-[4px] border-summer-space bg-summer-tiger">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 border-[3px] border-summer-space bg-summer-amber flex items-center justify-center font-black text-summer-space">U</div>
-              <div>
-                <p className="text-sm font-black text-summer-space uppercase">Free User</p>
-                <p className="text-xs font-bold text-summer-space/80">Online Optimized</p>
-              </div>
-            </div>
-          </div>
-        </aside>
+      <body className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} font-mono antialiased min-h-screen flex flex-col lg:flex-row selection:bg-summer-tiger selection:text-summer-space`}>
+        {/* Sidebar Navigation - Brutalist / Responsive */}
+        <Sidebar />
 
         {/* Main Content Area */}
-        <main className="flex-1 bg-summer-sky relative pb-28">
+        <main className="flex-1 bg-summer-sky relative pb-28 min-w-0">
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#023047 2px, transparent 2px)', backgroundSize: '32px 32px' }}></div>
           <div className="relative z-10">
             {children}
@@ -219,6 +143,7 @@ export default function RootLayout({
                 <ul className="space-y-2 font-bold text-sm text-summer-space/80">
                   <li><Link href="/about" className="hover:text-summer-tiger hover:underline">About Us</Link></li>
                   <li><Link href="/contact" className="hover:text-summer-tiger hover:underline">Contact Us</Link></li>
+                  <li><Link href="/donate" className="hover:text-summer-tiger hover:underline">Buy Me a Coffee</Link></li>
                 </ul>
               </div>
               <div>
@@ -229,7 +154,7 @@ export default function RootLayout({
           </footer>
 
           {/* Sticky Bottom Ad */}
-          <div className="fixed bottom-0 left-64 right-0 z-50 p-2 bg-summer-sea border-t-[4px] border-summer-space shadow-[0px_-4px_0px_#023047] flex justify-center">
+          <div className="fixed bottom-0 left-0 lg:left-64 right-0 z-50 p-2 bg-summer-sea border-t-[4px] border-summer-space shadow-[0px_-4px_0px_#023047] flex justify-center">
             <AdUnit width={728} height={90} className="hidden md:flex" />
             <AdUnit width={320} height={50} className="md:hidden" />
           </div>

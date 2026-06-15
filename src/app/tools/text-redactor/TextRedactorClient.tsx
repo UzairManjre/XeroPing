@@ -1,11 +1,14 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import { ShieldAlert, Download, Copy, Check, Settings2, ShieldCheck, Plus, Trash2, Eye, EyeOff } from 'lucide-react';
 import AdUnit from '@/components/AdUnit';
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
 import { useLocalHistory } from '@/hooks/useLocalHistory';
 import SparkMD5 from 'spark-md5';
+
+// ReDoS guard: max input size before regex is applied (500 KB)
+const MAX_REDACT_INPUT_BYTES = 500 * 1024;
 
 type RedactOptions = {
   emails: boolean;
@@ -30,6 +33,13 @@ export default function TextRedactor() {
   const [output, setOutput] = useState('');
   const [copied, setCopied] = useState(false);
   const [stats, setStats] = useState(0);
+  const [sizeError, setSizeError] = useState('');
+
+  // Dynamically loaded DOMPurify (client-only)
+  const purifyRef = useRef<any>(null);
+  useEffect(() => {
+    import('dompurify').then(mod => { purifyRef.current = mod.default; });
+  }, []);
 
   // Overhauled states
   const [maskingStrategy, setMaskingStrategy] = useState<MaskingStrategy>('placeholder');
@@ -89,6 +99,13 @@ export default function TextRedactor() {
   };
 
   const handleRedact = () => {
+    // ReDoS guard: reject inputs larger than 500 KB
+    const byteLen = new Blob([input]).size;
+    if (byteLen > MAX_REDACT_INPUT_BYTES) {
+      setSizeError(`Input too large (${(byteLen / 1024).toFixed(0)} KB). Please keep input under 500 KB to prevent browser freeze.`);
+      return;
+    }
+    setSizeError('');
     let result = input;
     let matchCount = 0;
 
@@ -140,7 +157,7 @@ export default function TextRedactor() {
     addHistory(input);
   };
 
-  // Compile HTML for dynamic Audit View highlighting matches
+  // Compile and sanitize HTML for dynamic Audit View highlighting matches
   const auditViewHtml = useMemo(() => {
     if (!input) return '';
     let result = input.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -191,6 +208,17 @@ export default function TextRedactor() {
       } catch {}
     }
 
+    // Sanitize with DOMPurify before injecting into DOM
+    // Only allow the specific <mark> and <span> tags generated above
+    if (purifyRef.current) {
+      return purifyRef.current.sanitize(result, {
+        ALLOWED_TAGS: ['mark', 'span', 'br'],
+        ALLOWED_ATTR: ['class', 'title'],
+        USE_PROFILES: { html: true },
+        FORBID_TAGS: ['svg', 'math', 'script', 'style', 'link', 'iframe', 'object'],
+        FORBID_ATTR: ['onerror', 'onload', 'onclick', 'onmouseover', 'href', 'src'],
+      });
+    }
     return result;
   }, [input, options, customRules]);
 
@@ -234,6 +262,14 @@ export default function TextRedactor() {
         </h1>
         <p className="text-summer-space/80 font-bold border-b-[3px] border-summer-space inline-block pb-1">Sanitize API keys, emails, and phone numbers online for free. Audited visual highlights.</p>
       </header>
+
+      {/* SIZE GUARD ERROR BANNER */}
+      {sizeError && (
+        <div className="mb-6 max-w-5xl mx-auto p-4 bg-rose-500 border-[4px] border-summer-space shadow-brutal flex items-center gap-3">
+          <ShieldAlert className="w-6 h-6 text-white shrink-0" />
+          <p className="text-white font-bold text-sm">{sizeError}</p>
+        </div>
+      )}
 
       {/* STRATEGY & RULE HEADER PANEL */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 max-w-5xl mx-auto">

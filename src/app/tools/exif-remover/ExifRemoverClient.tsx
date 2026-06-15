@@ -239,6 +239,8 @@ export default function ExifRemoverClient() {
   };
 
   const clearBatch = () => {
+    // Revoke the zip download URL to free memory
+    if (batchZipUrl) URL.revokeObjectURL(batchZipUrl);
     setBatchItems([]);
     setBatchZipUrl(null);
     setBatchStatus('idle');
@@ -285,7 +287,11 @@ export default function ExifRemoverClient() {
 
     try {
       const zipBlob = await zip.generateAsync({ type: 'blob' });
+      if (batchZipUrl) URL.revokeObjectURL(batchZipUrl); // revoke previous zip URL
       setBatchZipUrl(URL.createObjectURL(zipBlob));
+      // Nullify zip and per-item blobs to allow GC to reclaim memory
+      (zip as any) = null;
+      setBatchItems(prev => prev.map(item => ({ ...item, processedBlob: undefined })));
       setBatchStatus('success');
     } catch (err) {
       setBatchStatus('error');
