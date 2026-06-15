@@ -9,7 +9,7 @@ import { UploadCloud, FileText, Download, AlertCircle, Loader2, FileArchive, Set
 import AdUnit from '@/components/AdUnit';
 
 if (typeof window !== 'undefined') {
-  pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+  pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
 }
 
 
@@ -20,6 +20,7 @@ interface PdfFile {
   file: File;
   name: string;
   size: number;
+  previewUrl?: string;
 }
 
 interface PlacedElement {
@@ -43,6 +44,11 @@ export default function PdfToolkitClient() {
   // Output
   const [processedUrl, setProcessedUrl] = useState<string | null>(null);
   const [processedName, setProcessedName] = useState<string>('');
+  
+  // Large preview modal state
+  const [largePreviewUrl, setLargePreviewUrl] = useState<string | null>(null);
+  const [largePreviewName, setLargePreviewName] = useState<string>('');
+
 
   // Mode specific state
   const [splitRange, setSplitRange] = useState<string>('');
@@ -99,26 +105,66 @@ export default function PdfToolkitClient() {
     if (e.target.files) handleFilesAdded(Array.from(e.target.files));
   };
 
+  const generateFilePreview = async (pdfFile: PdfFile) => {
+    if (pdfFile.file.type === 'application/pdf') {
+      try {
+        const buffer = await pdfFile.file.arrayBuffer();
+        const pdf = await pdfjsLib.getDocument({ data: buffer }).promise;
+        const page = await pdf.getPage(1);
+        const viewport = page.getViewport({ scale: 0.25 });
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+        if (context) {
+          await page.render({ canvasContext: context, viewport }).promise;
+          const dataUrl = canvas.toDataURL('image/jpeg');
+          setFiles(prev => prev.map(f => f.id === pdfFile.id ? { ...f, previewUrl: dataUrl } : f));
+        }
+      } catch (e) {
+        console.error('Error generating preview:', e);
+      }
+    } else if (pdfFile.file.type.startsWith('image/')) {
+      const dataUrl = URL.createObjectURL(pdfFile.file);
+      setFiles(prev => prev.map(f => f.id === pdfFile.id ? { ...f, previewUrl: dataUrl } : f));
+    }
+  };
+
   const handleFilesAdded = (newFiles: File[]) => {
     resetState();
-    const mapped = newFiles.map(f => ({ id: Math.random().toString(36).substring(7), file: f, name: f.name, size: f.size }));
+    const mapped: PdfFile[] = newFiles.map(f => ({ id: Math.random().toString(36).substring(7), file: f, name: f.name, size: f.size }));
     
     // Single file modes
     const singleModes: Tab[] = ['split', 'rotate', 'metadata', 'pdf2img', 'watermark', 'esign', 'compress', 'ocr'];
+    let filesToUse: PdfFile[] = [];
     if (singleModes.includes(activeTab)) {
       const valid = mapped.filter(f => f.file.type === 'application/pdf');
       if (valid.length > 0) {
-        setFiles([valid[0]]);
-        if (activeTab === 'esign') {
-          loadPdfDocDetails(valid[0].file);
-        }
+        filesToUse = [valid[0]];
       }
     } else if (activeTab === 'merge') {
       const valid = mapped.filter(f => f.file.type === 'application/pdf');
-      setFiles(prev => [...prev, ...valid]);
+      filesToUse = valid;
     } else if (activeTab === 'img2pdf') {
       const valid = mapped.filter(f => f.file.type.startsWith('image/'));
-      setFiles(prev => [...prev, ...valid]);
+      filesToUse = valid;
+    }
+
+    if (filesToUse.length === 0) return;
+
+    if (activeTab === 'merge' || activeTab === 'img2pdf') {
+      setFiles(prev => {
+        const updated = [...prev, ...filesToUse];
+        filesToUse.forEach(f => generateFilePreview(f));
+        return updated;
+      });
+    } else {
+      setFiles(filesToUse);
+      filesToUse.forEach(f => generateFilePreview(f));
+    }
+
+    if (activeTab === 'esign') {
+      loadPdfDocDetails(filesToUse[0].file);
     }
   };
 
@@ -574,18 +620,40 @@ export default function PdfToolkitClient() {
           {files.length > 0 && (
             <div className="bg-summer-sea border-[4px] border-summer-space p-4 shadow-brutal space-y-3">
               <h3 className="text-summer-space font-black uppercase tracking-widest text-sm border-b-[3px] border-summer-space pb-2">Selected Files</h3>
-              <div className="space-y-2 max-h-64 overflow-y-auto pr-2">
+              <div className="space-y-3 max-h-96 overflow-y-auto pr-2">
                 {files.map((f, idx) => (
-                  <div key={f.id} className="bg-white border-[3px] border-summer-space p-3 flex items-center justify-between shadow-sm">
-                    <div className="flex items-center gap-3 overflow-hidden">
+                  <div key={f.id} className="bg-white border-[3px] border-summer-space p-3 flex items-center justify-between shadow-sm gap-3">
+                    <div className="flex items-center gap-3 overflow-hidden flex-1">
                       {activeTab === 'merge' || activeTab === 'img2pdf' ? (
-                        <button onClick={() => moveUp(idx)} disabled={idx === 0} className="text-summer-space hover:text-summer-tiger disabled:opacity-30">
+                        <button onClick={() => moveUp(idx)} disabled={idx === 0} className="text-summer-space hover:text-summer-tiger disabled:opacity-30 shrink-0">
                           <GripVertical className="w-5 h-5" />
                         </button>
-                      ) : (
-                        <FileText className="w-5 h-5 text-summer-space shrink-0" />
-                      )}
-                      <span className="font-bold text-sm text-summer-space truncate">{f.name}</span>
+                      ) : null}
+                      
+                      {/* Clickable Thumbnail Preview */}
+                      <button 
+                        onClick={() => {
+                          if (f.previewUrl) {
+                            setLargePreviewUrl(f.previewUrl);
+                            setLargePreviewName(f.name);
+                          }
+                        }}
+                        disabled={!f.previewUrl}
+                        className={`w-14 h-16 bg-zinc-100 border-[2px] border-summer-space flex items-center justify-center shrink-0 overflow-hidden relative shadow-sm transition-transform hover:scale-105 active:scale-95 ${f.previewUrl ? 'cursor-zoom-in' : 'cursor-not-allowed'}`}
+                        title={f.previewUrl ? "Click to view full preview" : "Generating preview..."}
+                      >
+                        {f.previewUrl ? (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img src={f.previewUrl} alt={f.name} className="w-full h-full object-cover" />
+                        ) : (
+                          <Loader2 className="w-5 h-5 text-summer-space animate-spin" />
+                        )}
+                      </button>
+
+                      <div className="overflow-hidden min-w-0 flex-1">
+                        <span className="font-black text-sm text-summer-space truncate block">{f.name}</span>
+                        <span className="text-[10px] font-bold text-zinc-500 block">{(f.size / 1024).toFixed(1)} KB</span>
+                      </div>
                     </div>
                     <button onClick={(e) => { e.stopPropagation(); removeFile(f.id); }} className="text-xs font-black uppercase text-rose-500 hover:text-rose-700 underline shrink-0 ml-4">Remove</button>
                   </div>
@@ -948,6 +1016,32 @@ export default function PdfToolkitClient() {
                 className="flex-1 py-3 bg-summer-amber border-[3px] border-summer-space font-black uppercase text-summer-space shadow-[3px_3px_0px_#023047] hover:translate-y-1 hover:shadow-none transition-all"
               >
                 Save
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* LARGE PREVIEW MODAL */}
+      {largePreviewUrl && (
+        <div className="fixed inset-0 z-[100] bg-summer-space/85 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in" onClick={() => setLargePreviewUrl(null)}>
+          <div className="bg-white border-[6px] border-summer-space p-6 max-w-2xl w-full shadow-[12px_12px_0px_#023047] relative" onClick={e => e.stopPropagation()}>
+            <button onClick={() => setLargePreviewUrl(null)} className="absolute top-4 right-4 text-summer-space hover:text-rose-500 transition-colors">
+              <X className="w-8 h-8 stroke-[3px]" />
+            </button>
+            <h3 className="text-2xl font-black text-summer-space uppercase tracking-tighter mb-4 truncate pr-8">
+              Preview: {largePreviewName}
+            </h3>
+            <div className="border-[4px] border-summer-space bg-zinc-100 flex items-center justify-center overflow-auto max-h-[70vh]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={largePreviewUrl} alt={largePreviewName} className="max-w-full max-h-full object-contain" />
+            </div>
+            <div className="mt-4 text-right">
+              <button 
+                onClick={() => setLargePreviewUrl(null)}
+                className="px-6 py-2.5 bg-summer-space text-white border-[3px] border-summer-space font-black uppercase tracking-widest text-sm hover:bg-summer-tiger hover:text-summer-space transition-all shadow-[4px_4px_0px_#8ecae6] active:translate-y-1 active:shadow-none"
+              >
+                Close Preview
               </button>
             </div>
           </div>

@@ -27,10 +27,10 @@ export default function Donate() {
       {/* HEADER */}
       <header className="mb-10 text-center border-b-[4px] border-summer-space pb-8">
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-none bg-summer-amber border-[3px] border-summer-space mb-4 shadow-sm">
-          <Coffee className="w-8 h-8 text-summer-space stroke-[2.5px]" />
+          <Heart className="w-8 h-8 text-summer-space stroke-[2.5px] fill-rose-500" />
         </div>
         <h1 className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-summer-space mb-3" style={{ textShadow: '2px 2px 0px #fb8500' }}>
-          Buy Me a Coffee
+          Support ZeroNode
         </h1>
         <p className="text-summer-space/80 font-bold max-w-xl mx-auto">
           ZeroNode runs 100% locally in your browser to protect your privacy. No uploads, no servers, and no subscriptions. Support our independent development!
@@ -44,7 +44,7 @@ export default function Donate() {
           <div className="bg-summer-sky/20 border-[3px] border-summer-space p-6 shadow-sm">
             <h3 className="font-black text-lg uppercase tracking-wider mb-4 text-summer-space">Support Level</h3>
             
-            {/* Coffee Amount Button Selectors */}
+            {/* Support Amount Button Selectors */}
             <div className="flex gap-3 mb-6">
               {[1, 3, 5, 10].map((num) => (
                 <button
@@ -56,7 +56,7 @@ export default function Donate() {
                       : 'bg-white hover:bg-zinc-50 text-summer-space'
                   }`}
                 >
-                  {num === 1 ? '☕ 1' : `☕ ${num}`}
+                  {num === 1 ? '❤️ $5' : `❤️ $${num * pricePerCoffee}`}
                 </button>
               ))}
             </div>
@@ -64,7 +64,7 @@ export default function Donate() {
             {/* Range Slider */}
             <div className="space-y-2 mb-6">
               <div className="flex justify-between font-black text-sm uppercase">
-                <span>Number of Coffees: {coffees}</span>
+                <span>Support Level: {coffees} {coffees === 1 ? 'Unit' : 'Units'}</span>
                 <span>${totalAmount} USD</span>
               </div>
               <input
@@ -80,30 +80,21 @@ export default function Donate() {
             {/* Dynamic Status / message */}
             <div className="bg-white border-[3px] border-summer-space p-4 text-center font-bold text-sm">
               {coffees <= 2 && '😊 Every drop counts! Thank you for the support.'}
-              {coffees > 2 && coffees <= 5 && '🚀 Coffee powers coders. You are fueling next week\'s features!'}
+              {coffees > 2 && coffees <= 5 && '🚀 Support powers coders. You are fueling next week\'s features!'}
               {coffees > 5 && coffees <= 10 && '🔥 Super Support! You are helping cover our domain and hosting fees.'}
               {coffees > 10 && '👑 Absolute Legend! You are a patron of privacy-first tooling.'}
             </div>
           </div>
 
           {/* TRADITIONAL CHANNELS */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4">
             <a
-              href="https://buymeacoffee.com/zeronode"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-3 bg-yellow-400 hover:bg-yellow-500 text-black border-[3px] border-summer-space p-4 font-black uppercase tracking-widest text-sm transition-all shadow-brutal hover:translate-x-1 hover:translate-y-1"
-            >
-              <Coffee className="w-5 h-5 fill-current" /> Buy Me A Coffee <ExternalLink className="w-4 h-4" />
-            </a>
-            
-            <a
-              href="https://paypal.me/zeronode"
+              href="https://www.paypal.com/paypalme/uzairmanjre"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-3 bg-blue-500 hover:bg-blue-600 text-white border-[3px] border-summer-space p-4 font-black uppercase tracking-widest text-sm transition-all shadow-brutal hover:translate-x-1 hover:translate-y-1"
             >
-              <DollarSign className="w-5 h-5" /> PayPal Me <ExternalLink className="w-4 h-4" />
+              <DollarSign className="w-5 h-5" /> Donate via PayPal <ExternalLink className="w-4 h-4" />
             </a>
           </div>
         </div>

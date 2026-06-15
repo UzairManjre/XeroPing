@@ -143,7 +143,7 @@ export default function RootLayout({
                 <ul className="space-y-2 font-bold text-sm text-summer-space/80">
                   <li><Link href="/about" className="hover:text-summer-tiger hover:underline">About Us</Link></li>
                   <li><Link href="/contact" className="hover:text-summer-tiger hover:underline">Contact Us</Link></li>
-                  <li><Link href="/donate" className="hover:text-summer-tiger hover:underline">Buy Me a Coffee</Link></li>
+                  <li><Link href="/donate" className="hover:text-summer-tiger hover:underline">Support Us</Link></li>
                 </ul>
               </div>
               <div>

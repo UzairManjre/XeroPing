@@ -19,6 +19,8 @@ async function init() {
 
 export interface ConvertOptions {
   maxWidth?: number;
+  width?: number;
+  height?: number;
   quality?: number;
   targetFormat: string;
 }
@@ -33,7 +35,15 @@ const api = {
         
         ImageMagick.read(uint8Array, (image) => {
           // Resize if needed
-          if (options.maxWidth && image.width > options.maxWidth) {
+          if (options.width && options.height) {
+            image.resize(options.width, options.height);
+          } else if (options.width) {
+            const ratio = options.width / image.width;
+            image.resize(options.width, Math.round(image.height * ratio));
+          } else if (options.height) {
+            const ratio = options.height / image.height;
+            image.resize(Math.round(image.width * ratio), options.height);
+          } else if (options.maxWidth && image.width > options.maxWidth) {
             const ratio = options.maxWidth / image.width;
             image.resize(options.maxWidth, Math.round(image.height * ratio));
           }

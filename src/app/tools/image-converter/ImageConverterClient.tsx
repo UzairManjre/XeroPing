@@ -43,7 +43,10 @@ export default function ImageConverter() {
   // Settings
   const [targetFormat, setTargetFormat] = useState<Format>('image/webp');
   const [quality, setQuality] = useState<number>(0.8);
+  const [resizeMode, setResizeMode] = useState<'max' | 'custom'>('max');
   const [maxWidth, setMaxWidth] = useState<number>(1920);
+  const [customWidth, setCustomWidth] = useState<number | ''>('');
+  const [customHeight, setCustomHeight] = useState<number | ''>('');
 
   // Pre-transform options
   const [grayscale, setGrayscale] = useState(false);
@@ -216,10 +219,21 @@ export default function ImageConverter() {
 
       // Step 2: Convert using ImageMagick WASM worker
       const options: ConvertOptions = {
-        maxWidth: targetFormat === 'image/x-icon' ? Math.min(maxWidth, 256) : maxWidth,
         targetFormat: targetFormat,
         quality: quality
       };
+      
+      if (resizeMode === 'max') {
+        options.maxWidth = targetFormat === 'image/x-icon' ? Math.min(maxWidth, 256) : maxWidth;
+      } else {
+        if (customWidth) options.width = Number(customWidth);
+        if (customHeight) options.height = Number(customHeight);
+        // Ensure ICO is max 256px
+        if (targetFormat === 'image/x-icon') {
+            if (options.width && options.width > 256) options.width = 256;
+            if (options.height && options.height > 256) options.height = 256;
+        }
+      }
 
       const result = await workerApi.convertImage(preprocessedBuffer, options);
       
@@ -311,7 +325,13 @@ export default function ImageConverter() {
         
         if (pdfDoc) {
           // Merge to PDF: convert to JPEG first for pdf-lib compatibility
-          const options: ConvertOptions = { maxWidth, targetFormat: 'image/jpeg', quality };
+          const options: ConvertOptions = { targetFormat: 'image/jpeg', quality };
+          if (resizeMode === 'max') {
+            options.maxWidth = maxWidth;
+          } else {
+            if (customWidth) options.width = Number(customWidth);
+            if (customHeight) options.height = Number(customHeight);
+          }
           const result = await workerApi.convertImage(buffer, options);
           
           const image = await pdfDoc.embedJpg(result.buffer);
@@ -322,7 +342,13 @@ export default function ImageConverter() {
           item.processedUrl = '#'; // merged
         } else {
           // Normal logic
-          const options: ConvertOptions = { maxWidth, targetFormat, quality };
+          const options: ConvertOptions = { targetFormat, quality };
+          if (resizeMode === 'max') {
+            options.maxWidth = maxWidth;
+          } else {
+            if (customWidth) options.width = Number(customWidth);
+            if (customHeight) options.height = Number(customHeight);
+          }
           const result = await workerApi.convertImage(buffer, options);
           const compressedBlob = new Blob([result.buffer], { type: result.mime });
           
@@ -625,16 +651,39 @@ export default function ImageConverter() {
 
                     {/* Dimensions */}
                     <div className="p-4 bg-white border-[4px] border-summer-space shadow-brutal">
-                      <label className="block text-summer-space font-black uppercase tracking-widest text-sm mb-3">Max Width / Height</label>
-                      <select 
-                        value={maxWidth} onChange={(e) => setMaxWidth(parseInt(e.target.value))}
-                        className="w-full p-3 bg-summer-sky border-[3px] border-summer-space font-black text-summer-space shadow-sm uppercase tracking-widest focus:outline-none"
-                      >
-                        <option value={800}>800px (Fast Web)</option>
-                        <option value={1200}>1200px (Standard HD)</option>
-                        <option value={1920}>1920px (Full HD)</option>
-                        <option value={3840}>3840px (4K)</option>
-                      </select>
+                      <div className="flex items-center justify-between mb-3">
+                        <label className="block text-summer-space font-black uppercase tracking-widest text-sm">Dimensions & Resize</label>
+                        <div className="flex gap-2">
+                          <button onClick={() => setResizeMode('max')} className={`text-[10px] font-black uppercase px-2 py-1 border-[2px] border-summer-space ${resizeMode === 'max' ? 'bg-summer-space text-white' : 'bg-white text-summer-space'}`}>Max Limit</button>
+                          <button onClick={() => setResizeMode('custom')} className={`text-[10px] font-black uppercase px-2 py-1 border-[2px] border-summer-space ${resizeMode === 'custom' ? 'bg-summer-space text-white' : 'bg-white text-summer-space'}`}>Custom</button>
+                        </div>
+                      </div>
+
+                      {resizeMode === 'max' ? (
+                        <div>
+                          <select 
+                            value={maxWidth} onChange={(e) => setMaxWidth(parseInt(e.target.value))}
+                            className="w-full p-3 bg-summer-sky border-[3px] border-summer-space font-black text-summer-space shadow-sm uppercase tracking-widest focus:outline-none"
+                          >
+                            <option value={800}>800px (Fast Web)</option>
+                            <option value={1200}>1200px (Standard HD)</option>
+                            <option value={1920}>1920px (Full HD)</option>
+                            <option value={3840}>3840px (4K)</option>
+                          </select>
+                          <p className="text-[10px] font-bold text-summer-space/70 mt-2 uppercase tracking-widest">Images larger than this will be scaled down.</p>
+                        </div>
+                      ) : (
+                        <div className="flex gap-3">
+                          <div className="flex-1">
+                            <label className="block text-xs font-black uppercase tracking-widest text-summer-space/70 mb-1">Width (px)</label>
+                            <input type="number" placeholder="Auto" value={customWidth} onChange={(e) => setCustomWidth(e.target.value ? parseInt(e.target.value) : '')} className="w-full p-2 bg-white border-[3px] border-summer-space font-black text-summer-space focus:outline-none focus:bg-summer-sky/30" />
+                          </div>
+                          <div className="flex-1">
+                            <label className="block text-xs font-black uppercase tracking-widest text-summer-space/70 mb-1">Height (px)</label>
+                            <input type="number" placeholder="Auto" value={customHeight} onChange={(e) => setCustomHeight(e.target.value ? parseInt(e.target.value) : '')} className="w-full p-2 bg-white border-[3px] border-summer-space font-black text-summer-space focus:outline-none focus:bg-summer-sky/30" />
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
 
@@ -755,18 +804,31 @@ export default function ImageConverter() {
                     <option value="0.4">Aggressive (40%)</option>
                   </select>
                 </div>
-                <div>
-                  <label className="block text-xs font-black uppercase tracking-widest text-summer-space/70 mb-1.5">Max Dimension Limit</label>
-                  <select 
-                    value={maxWidth} 
-                    onChange={e => setMaxWidth(parseInt(e.target.value))}
-                    className="w-full p-2 border-[2px] border-summer-space bg-white text-xs font-black uppercase focus:outline-none"
-                  >
-                    <option value="800">800px (Fast Web)</option>
-                    <option value="1200">1200px (HD)</option>
-                    <option value="1920">1920px (Full HD)</option>
-                    <option value="3840">3840px (4K)</option>
-                  </select>
+                <div className="col-span-1 md:col-span-3 lg:col-span-1">
+                  <div className="flex items-center justify-between mb-1.5">
+                    <label className="block text-xs font-black uppercase tracking-widest text-summer-space/70">Resize Mode</label>
+                    <div className="flex gap-1">
+                      <button onClick={() => setResizeMode('max')} className={`text-[9px] font-black uppercase px-1.5 py-0.5 border-[2px] border-summer-space ${resizeMode === 'max' ? 'bg-summer-space text-white' : 'bg-white text-summer-space'}`}>Max Limit</button>
+                      <button onClick={() => setResizeMode('custom')} className={`text-[9px] font-black uppercase px-1.5 py-0.5 border-[2px] border-summer-space ${resizeMode === 'custom' ? 'bg-summer-space text-white' : 'bg-white text-summer-space'}`}>Custom</button>
+                    </div>
+                  </div>
+                  {resizeMode === 'max' ? (
+                    <select 
+                      value={maxWidth} 
+                      onChange={e => setMaxWidth(parseInt(e.target.value))}
+                      className="w-full p-2 border-[2px] border-summer-space bg-white text-xs font-black uppercase focus:outline-none"
+                    >
+                      <option value="800">800px (Fast Web)</option>
+                      <option value="1200">1200px (HD)</option>
+                      <option value="1920">1920px (Full HD)</option>
+                      <option value="3840">3840px (4K)</option>
+                    </select>
+                  ) : (
+                    <div className="flex gap-2">
+                      <input type="number" placeholder="W" value={customWidth} onChange={(e) => setCustomWidth(e.target.value ? parseInt(e.target.value) : '')} className="w-full p-2 bg-white border-[2px] border-summer-space text-xs font-black text-summer-space focus:outline-none" />
+                      <input type="number" placeholder="H" value={customHeight} onChange={(e) => setCustomHeight(e.target.value ? parseInt(e.target.value) : '')} className="w-full p-2 bg-white border-[2px] border-summer-space text-xs font-black text-summer-space focus:outline-none" />
+                    </div>
+                  )}
                 </div>
               </div>
               {targetFormat === 'application/pdf' && (
