@@ -12,6 +12,15 @@ if (typeof window !== 'undefined') {
   pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
 }
 
+// Robust PDF detection: checks MIME type AND file extension
+const isPdfFile = (file: File): boolean => {
+  return (
+    file.type === 'application/pdf' ||
+    file.type === 'application/x-pdf' ||
+    file.name.toLowerCase().endsWith('.pdf')
+  );
+};
+
 
 type Tab = 'merge' | 'split' | 'rotate' | 'img2pdf' | 'metadata' | 'pdf2img' | 'watermark' | 'esign' | 'compress' | 'ocr';
 
@@ -106,7 +115,7 @@ export default function PdfToolkitClient() {
   };
 
   const generateFilePreview = async (pdfFile: PdfFile) => {
-    if (pdfFile.file.type === 'application/pdf') {
+    if (isPdfFile(pdfFile.file)) {
       try {
         const buffer = await pdfFile.file.arrayBuffer();
         const pdf = await pdfjsLib.getDocument({ data: buffer }).promise;
@@ -138,12 +147,12 @@ export default function PdfToolkitClient() {
     const singleModes: Tab[] = ['split', 'rotate', 'metadata', 'pdf2img', 'watermark', 'esign', 'compress', 'ocr'];
     let filesToUse: PdfFile[] = [];
     if (singleModes.includes(activeTab)) {
-      const valid = mapped.filter(f => f.file.type === 'application/pdf');
+      const valid = mapped.filter(f => isPdfFile(f.file));
       if (valid.length > 0) {
         filesToUse = [valid[0]];
       }
     } else if (activeTab === 'merge') {
-      const valid = mapped.filter(f => f.file.type === 'application/pdf');
+      const valid = mapped.filter(f => isPdfFile(f.file));
       filesToUse = valid;
     } else if (activeTab === 'img2pdf') {
       const valid = mapped.filter(f => f.file.type.startsWith('image/'));
@@ -604,7 +613,7 @@ export default function PdfToolkitClient() {
             <input 
               type="file" ref={fileInputRef} className="hidden" 
               multiple={activeTab === 'merge' || activeTab === 'img2pdf'}
-              accept={activeTab === 'img2pdf' ? 'image/jpeg, image/png' : 'application/pdf'} 
+              accept={activeTab === 'img2pdf' ? 'image/jpeg, image/png' : 'application/pdf,.pdf'} 
               onChange={handleFileChange} 
             />
             <div className="flex flex-col items-center justify-center space-y-3">

@@ -7,6 +7,17 @@ import { UploadCloud, Image as ImageIcon, Settings2, Download, AlertCircle, Load
 import AdUnit from '@/components/AdUnit';
 import JSZip from 'jszip';
 import { PDFDocument } from 'pdf-lib';
+// NOTE: pdfjs-dist is loaded lazily inside extractPdfPages() to avoid SSR prerender crashes
+// (pdfjs uses browser-only APIs like DOMMatrix which don't exist in Node.js).
+
+// Robust PDF detection: checks MIME type AND file extension
+const isPdfFile = (file: File): boolean => {
+  return (
+    file.type === 'application/pdf' ||
+    file.type === 'application/x-pdf' ||
+    file.name.toLowerCase().endsWith('.pdf')
+  );
+};
 
 type Format = 'image/webp' | 'image/jpeg' | 'image/png' | 'image/avif' | 'image/gif' | 'image/bmp' | 'image/tiff' | 'image/x-icon' | 'application/pdf';
 
@@ -69,6 +80,8 @@ export default function ImageConverter() {
   const [batchZipUrl, setBatchZipUrl] = useState<string | null>(null);
   const [mergeToPdf, setMergeToPdf] = useState(true);
   const batchInputRef = useRef<HTMLInputElement>(null);
+  const [isExtractingPdf, setIsExtractingPdf] = useState(false);
+  const [pdfExtractMessage, setPdfExtractMessage] = useState('');
 
   // Handle single file preview URL creation
   useEffect(() => {
@@ -89,7 +102,7 @@ export default function ImageConverter() {
       if (activeMode === 'single') {
         processSelection(e.dataTransfer.files[0]);
       } else {
-        addBatchFiles(Array.from(e.dataTransfer.files));
+        void addBatchFiles(Array.from(e.dataTransfer.files));
       }
     }
   };
@@ -99,12 +112,20 @@ export default function ImageConverter() {
       if (activeMode === 'single') {
         processSelection(e.target.files[0]);
       } else {
-        addBatchFiles(Array.from(e.target.files));
+        void addBatchFiles(Array.from(e.target.files));
       }
     }
+    // Reset input so the same file can be re-selected
+    e.target.value = '';
   };
 
   const processSelection = (targetFile: File) => {
+    // Block PDF files in single editor mode
+    if (isPdfFile(targetFile)) {
+      setStatus('error');
+      setMessage('PDF files are not supported in Single Editor mode. Use the Batch Converter tab to convert PDF pages into images.');
+      return;
+    }
     setFile(targetFile);
     setStatus('idle');
     setProcessedFile(null);
@@ -270,18 +291,81 @@ export default function ImageConverter() {
   };
 
   // --- BATCH CONVERSION LOGIC ---
-  const addBatchFiles = (filesList: File[]) => {
-    const newItems = filesList.map(f => ({
-      id: Math.random().toString(36).substring(7),
-      file: f,
-      previewUrl: URL.createObjectURL(f),
-      status: 'idle' as const,
-      processedBlob: null,
-      processedUrl: null
-    }));
-    setBatchItems(prev => [...prev, ...newItems]);
+
+  // Extract PDF pages as individual JPEG image Files using pdfjs-dist
+  // pdfjs is imported dynamically here to prevent SSR prerender crashes
+  // (pdfjs uses browser-only DOMMatrix which does not exist in Node.js)
+  const extractPdfPages = async (pdfFile: File): Promise<File[]> => {
+    const pdfjsLib = await import('pdfjs-dist');
+    pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
+
+    const buffer = await pdfFile.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({ data: buffer }).promise;
+    const baseName = pdfFile.name.replace(/\.pdf$/i, '');
+    const pageFiles: File[] = [];
+
+    for (let i = 1; i <= pdf.numPages; i++) {
+      setPdfExtractMessage(`Extracting page ${i} of ${pdf.numPages} from "${pdfFile.name}"...`);
+      const page = await pdf.getPage(i);
+      const viewport = page.getViewport({ scale: 2.0 });
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('2d');
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+      if (!context) continue;
+      await page.render({ canvasContext: context, viewport: viewport } as any).promise;
+      const blob = await new Promise<Blob | null>(resolve => canvas.toBlob(resolve, 'image/jpeg', 0.92));
+      if (!blob) continue;
+      const pageFile = new File([blob], `${baseName}_page${i}.jpg`, { type: 'image/jpeg' });
+      pageFiles.push(pageFile);
+    }
+    return pageFiles;
+  };
+
+  const addBatchFiles = async (filesList: File[]) => {
     setBatchZipUrl(null);
     setBatchStatus('idle');
+
+    // Separate PDFs from image files
+    const pdfFiles = filesList.filter(f => isPdfFile(f));
+    const imageFiles = filesList.filter(f => !isPdfFile(f));
+
+    // Add plain image files immediately
+    if (imageFiles.length > 0) {
+      const newItems = imageFiles.map(f => ({
+        id: Math.random().toString(36).substring(7),
+        file: f,
+        previewUrl: URL.createObjectURL(f),
+        status: 'idle' as const,
+        processedBlob: null,
+        processedUrl: null
+      }));
+      setBatchItems(prev => [...prev, ...newItems]);
+    }
+
+    // Extract pages from each PDF
+    if (pdfFiles.length > 0) {
+      setIsExtractingPdf(true);
+      try {
+        for (const pdf of pdfFiles) {
+          const pages = await extractPdfPages(pdf);
+          const pageItems = pages.map(f => ({
+            id: Math.random().toString(36).substring(7),
+            file: f,
+            previewUrl: URL.createObjectURL(f),
+            status: 'idle' as const,
+            processedBlob: null,
+            processedUrl: null
+          }));
+          setBatchItems(prev => [...prev, ...pageItems]);
+        }
+      } catch (err: any) {
+        console.error('PDF extraction error:', err);
+      } finally {
+        setIsExtractingPdf(false);
+        setPdfExtractMessage('');
+      }
+    }
   };
 
   const removeBatchItem = (id: string) => {
@@ -441,7 +525,7 @@ export default function ImageConverter() {
                 }`}
                 onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={handleDrop} onClick={() => fileInputRef.current?.click()}
               >
-                <input type="file" ref={fileInputRef} className="hidden" accept=".png, .jpg, .jpeg, .webp, .gif, .bmp, .tiff, .tif, .cr2, .nef, .arw, .dng, .psd, .ai, .eps, .pdf, .avif" onChange={handleFileChange} />
+                <input type="file" ref={fileInputRef} className="hidden" accept=".png, .jpg, .jpeg, .webp, .gif, .bmp, .tiff, .tif, .cr2, .nef, .arw, .dng, .psd, .ai, .eps, .avif" onChange={handleFileChange} />
                 <div className="flex flex-col items-center justify-center space-y-4">
                   <div className="w-20 h-20 bg-summer-sea border-[4px] border-summer-space flex items-center justify-center mb-2 shadow-brutal">
                     <UploadCloud className="w-10 h-10 text-summer-space stroke-[2.5px]" />
@@ -753,15 +837,28 @@ export default function ImageConverter() {
             }`}
             onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={handleDrop} onClick={() => batchInputRef.current?.click()}
           >
-            <input type="file" ref={batchInputRef} className="hidden" accept="image/*" multiple onChange={handleFileChange} />
+            <input type="file" ref={batchInputRef} className="hidden" accept="image/*,application/pdf,.pdf" multiple onChange={handleFileChange} />
             <div className="flex flex-col items-center justify-center space-y-3">
               <div className="w-14 h-14 bg-summer-sea border-[3px] border-summer-space flex items-center justify-center shadow-brutal">
                 <Layers className="w-8 h-8 text-summer-space" />
               </div>
-              <span className="text-summer-space font-black text-xl uppercase tracking-tighter block">Select Multiple Images</span>
-              <p className="text-xs font-bold text-summer-space/70 uppercase tracking-widest">Convert a batch of files simultaneously online.</p>
+              <span className="text-summer-space font-black text-xl uppercase tracking-tighter block">Select Images or PDFs</span>
+              <p className="text-xs font-bold text-summer-space/70 uppercase tracking-widest">Images convert directly. PDF pages are extracted as individual images.</p>
             </div>
           </div>
+
+          {/* PDF Extraction Progress */}
+          {isExtractingPdf && (
+            <div className="border-[4px] border-summer-space bg-summer-sky p-6 shadow-brutal flex items-center gap-4 animate-in fade-in">
+              <div className="w-10 h-10 bg-summer-tiger border-[3px] border-summer-space flex items-center justify-center shrink-0">
+                <Loader2 className="w-6 h-6 text-summer-space animate-spin" />
+              </div>
+              <div>
+                <p className="font-black uppercase tracking-widest text-sm text-summer-space">Extracting PDF Pages...</p>
+                <p className="text-xs font-bold text-summer-space/70 mt-0.5">{pdfExtractMessage}</p>
+              </div>
+            </div>
+          )}
 
           {/* BATCH ITEMS GRID */}
           {batchItems.length > 0 && (
